@@ -139,7 +139,6 @@ PERL_MM_OPT="INSTALL_BASE=/usr/local/perl5"; export PERL_MM_OPT;
 # Added by Krypton
 export GPG_TTY=$(tty)
 
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 eval "$(pyenv init -)"
 
 
