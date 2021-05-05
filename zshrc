@@ -126,10 +126,10 @@ bindkey -s "^[Oj" "*"
 bindkey -s "^[Oo" "/"
 
 GOPATH="$HOME/go"
-PATH="$HOME/.cargo/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/texlive/2019/bin/x86_64-darwin:$HOME/Dropbox/Documents/Scripts/Executable:$GOPATH/bin"
+PATH="$HOME/.cargo/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/texlive/2019/bin/x86_64-darwin:$HOME/Documents/Scripts/Executable:$GOPATH/bin"
 MANPATH="/usr/local/man:$MANPATH"
 
-CLASSPATH="$HOME/Dropbox/Documents/Programming/Java/Packages"
+CLASSPATH="$HOME/Documents/Programming/Java/Packages"
 
 PERL5LIB="/usr/local/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
 PERL_LOCAL_LIB_ROOT="/usr/local/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
