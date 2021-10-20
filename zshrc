@@ -15,7 +15,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 POWERLEVEL10K_MODE='nerdfont-complete'
 POWERLEVEL10K_PROMPT_ON_NEWLINE=true
 POWERLEVEL10K_RIGHT_PROMPT_ELEMENTS=(vi_mode time)
-POWERLEVEL10K_LEFT_PROMPT_ELEMENTS=(pyenv context dir vcs status)
+POWERLEVEL10K_LEFT_PROMPT_ELEMENTS=(context dir vcs status)
 POWERLEVEL10K_PROMPT_ADD_NEWLINE=true
 export VIRTUAL_ENV_DISABLE_PROMPT=''
 # Uncomment the following line to use case-sensitive completion.
@@ -56,7 +56,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git copyfile brew droplr vscode zsh-autosuggestions docker pyenv)
+plugins=(git copyfile brew droplr vscode zsh-autosuggestions)
 
 # Setup homebrew autocomplete
 if type brew &>/dev/null; then
@@ -100,7 +100,6 @@ alias e="open -a MacVim.app $1"
 alias java="java -cp ."
 alias javac="javac -cp ."
 alias update_all="pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U;tlmgr update --self --all;bubu;"
-alias docker-dadams="docker -H=tcp://142.93.88.31:2376 --tlsverify"
 
 # Keypad
 # 0 . Enter
@@ -138,15 +137,6 @@ PERL_MM_OPT="INSTALL_BASE=/usr/local/perl5"; export PERL_MM_OPT;
 
 # Added by Krypton
 export GPG_TTY=$(tty)
-
-eval "$(pyenv init -)"
-
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/google-cloud-sdk/path.zsh.inc"; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/google-cloud-sdk/completion.zsh.inc"; fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
