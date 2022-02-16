@@ -125,7 +125,7 @@ bindkey -s "^[Oj" "*"
 bindkey -s "^[Oo" "/"
 
 GOPATH="$HOME/go"
-PATH="$HOME/.cargo/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/texlive/2019/bin/x86_64-darwin:$HOME/Documents/Scripts/Executable:$GOPATH/bin"
+PATH="/opt/homerew/sbin:/opt/homerew/bin:$HOME/.cargo/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:$GOPATH/bin"
 MANPATH="/usr/local/man:$MANPATH"
 
 CLASSPATH="$HOME/Documents/Programming/Java/Packages"
@@ -140,3 +140,5 @@ export GPG_TTY=$(tty)
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+eval $(/opt/homebrew/bin/brew shellenv)
