@@ -48,8 +48,11 @@ else
   Plug 'bkad/CamelCaseMotion'
   Plug 'PeterRincker/vim-searchlight'
   Plug 'qpkorr/vim-bufkill'
+  Plug 'rust-lang/rust.vim'
   call plug#end()
 
+  syntax enable
+  filetype plugin indent on
   set autoindent
   set smarttab
   set shiftwidth=4
@@ -103,7 +106,7 @@ else
   " Keybindings
   map <C-n> :NERDTreeToggle<CR>
   nnoremap K A<CR><Esc>
-  nnoremap <Esc> :noh<Cr><Esc>
+  "nnoremap <Esc> :noh<Cr><Esc>
   nmap <C-c> :BD<cr>
 
   " Autoclose brackets
