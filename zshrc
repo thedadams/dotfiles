@@ -1,9 +1,9 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+# # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# # Initialization code that may require console input (password prompts, [y/n]
+# # confirmations, etc.) must go above this block; everything else may go below.
+# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# fi
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
@@ -11,13 +11,13 @@ export ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="powerlevel10k/powerlevel10k"
-POWERLEVEL10K_MODE='nerdfont-complete'
-POWERLEVEL10K_PROMPT_ON_NEWLINE=true
-POWERLEVEL10K_RIGHT_PROMPT_ELEMENTS=(prompt_char time)
-POWERLEVEL10K_LEFT_PROMPT_ELEMENTS=(context dir vcs status gcloud pyenv)
-POWERLEVEL10K_PROMPT_ADD_NEWLINE=true
-export VIRTUAL_ENV_DISABLE_PROMPT=''
+# ZSH_THEME="powerlevel10k/powerlevel10k"
+# POWERLEVEL10K_MODE='nerdfont-complete'
+# POWERLEVEL10K_PROMPT_ON_NEWLINE=true
+# POWERLEVEL10K_RIGHT_PROMPT_ELEMENTS=(prompt_char time)
+# POWERLEVEL10K_LEFT_PROMPT_ELEMENTS=(context dir vcs status gcloud pyenv)
+# POWERLEVEL10K_PROMPT_ADD_NEWLINE=true
+# export VIRTUAL_ENV_DISABLE_PROMPT=''
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
@@ -145,3 +145,11 @@ export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init --path)"
 eval "$(pyenv virtualenv-init -)"
 
+eval "$(direnv hook zsh)"
+
+export STARSHIP_CONFIG=$HOME/.starship.toml
+eval "$(starship init zsh)"
+
+### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+export PATH="$HOME/.rd/bin:$PATH"
+### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)

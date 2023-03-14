@@ -1,0 +1,23 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Inserts a blank line between shell prompts
+add_newline = true
+
+# ~/.config/starship.toml
+
+[git_status]
+format = '([\[$all_status$ahead_behind\]]($style) )'
+conflicted = '\($count\)🏳'
+ahead = '\($count\)🏎💨'
+behind = '\($count\)😰'
+diverged = '\($ahead_count⇡ $behind_count⇣\)😵'
+up_to_date = '[✓](green)'
+untracked = '\($count\)🤷'
+stashed = '[\($count\)📦](white)'
+modified = '[\($count\)📝](yellow)'
+staged = '[\($count\)➕](green)'
+renamed = '\($count\)👅'
+deleted = '[\($count\)🗑](red)'
+
+
