@@ -147,6 +147,32 @@ eval "$(pyenv virtualenv-init -)"
 
 eval "$(direnv hook zsh)"
 
+function set_win_title() {
+    local cmd=" ($@)"
+    if [[ "$cmd" == " (starship_precmd)" || "$cmd" == " ()" ]]
+    then
+      cmd=""
+    fi
+    if [[ $PWD == $HOME ]]
+    then
+      if [[ $SSH_TTY ]]
+      then
+        echo -ne "\033]0; 🏛️ @ $HOSTNAME ~$cmd\a" < /dev/null
+      else
+        echo -ne "\033]0; 🏠 ~$cmd\a" < /dev/null
+      fi
+    else
+      BASEPWD=$(basename "$PWD")
+      if [[ $SSH_TTY ]]
+      then
+        echo -ne "\033]0; 🌩️ $BASEPWD @ $HOSTNAME $cmd\a" < /dev/null
+      else
+        echo -ne "\033]0; 📁 $BASEPWD $cmd\a" < /dev/null
+      fi
+    fi
+
+  }
+precmd_functions+=(set_win_title)
 export STARSHIP_CONFIG=$HOME/.starship.toml
 eval "$(starship init zsh)"
 
