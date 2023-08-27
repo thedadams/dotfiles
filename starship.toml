@@ -4,6 +4,12 @@
 # Inserts a blank line between shell prompts
 add_newline = true
 
+[time]
+disabled = false
+format = '🕙 [$time]($style) '
+time_format = '%T'
+utc_time_offset = '-4'
+
 [git_branch]
 symbol = '  '
 
@@ -21,4 +27,9 @@ staged = '[\($count\)➕](green)'
 renamed = '\($count\)👅'
 deleted = '[\($count\)🗑 ](red)'
 
+[custom.acorn]
+command = 'yq .currentProject $HOME/Library/Application\ Support/acorn/config.yaml'
+format = '[🐿️  $output]($style) '
+when = ''' which acorn '''
+style = 'red'
 
