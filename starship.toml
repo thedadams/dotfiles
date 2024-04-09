@@ -27,9 +27,3 @@ staged = '[\($count\)➕](green)'
 renamed = '\($count\)👅'
 deleted = '[\($count\)🗑 ](red)'
 
-[custom.acorn]
-command = 'yq .currentProject $HOME/Library/Application\ Support/acorn/config.yaml'
-format = '[🐿️  $output]($style) '
-when = ''' which acorn '''
-style = 'red'
-
