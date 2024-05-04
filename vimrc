@@ -49,6 +49,7 @@ else
   Plug 'PeterRincker/vim-searchlight'
   Plug 'qpkorr/vim-bufkill'
   Plug 'rust-lang/rust.vim'
+  Plug 'Exafunction/codeium.vim'
   call plug#end()
 
   syntax enable
