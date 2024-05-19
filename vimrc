@@ -18,13 +18,18 @@ else
   Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
   Plug 'Xuyuanp/nerdtree-git-plugin', {'on': 'NERDTreeToggle'}
   Plug 'jistr/vim-nerdtree-tabs', {'on': 'NERDTreeToggle'}
+  if has('nvim')
+    Plug 'olimorris/onedarkpro.nvim'
+  else
+    Plug 'joshdick/onedark.vim'
+  endif 
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'lervag/vimtex', {'for': 'tex'}
   Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
   Plug 'nsf/gocode', {'for': 'go'}
   Plug 'vim-jp/vim-go-extra', {'for': 'go'}
   Plug 'NLKNguyen/papercolor-theme'
   Plug 'kaicataldo/material.vim'
-  Plug 'joshdick/onedark.vim'
   Plug 'itchyny/lightline.vim'
   Plug 'ryanoasis/vim-devicons'
   Plug 'kamykn/spelunker.vim'
@@ -152,4 +157,8 @@ else
   call NERDTreeHighlightFile('docx', 'red', 'none', 'red', 'NONE')
   call NERDTreeHighlightFile('xlsx', 'red', 'none', 'red', 'NONE')
   call NERDTreeHighlightFile('pptx', 'red', 'none', 'red', 'NONE')
+
+  if has('nvim')
+    colorscheme onedark_vivid
+  endif
 endif
