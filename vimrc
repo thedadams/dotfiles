@@ -46,7 +46,6 @@ else
   Plug 'sjl/vitality.vim'
   Plug 'junegunn/vim-slash'
   Plug 'tpope/vim-commentary'
-  Plug 'skielbasa/vim-material-monokai'
   Plug 'sheerun/vim-polyglot'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'machakann/vim-sandwich'
@@ -55,6 +54,12 @@ else
   Plug 'qpkorr/vim-bufkill'
   Plug 'rust-lang/rust.vim'
   Plug 'Exafunction/codeium.vim'
+  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+  Plug 'junegunn/fzf.vim'
+  Plug 'stsewd/fzf-checkout.vim'
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'NeogitOrg/neogit'
+  Plug 'voldikss/vim-floaterm'
   call plug#end()
 
   syntax enable
@@ -77,7 +82,6 @@ else
   set background=dark
   syntax on
   colorscheme onedark
-  let g:materialmonokai_italic=1
   let g:vitality_fix_focus=0
   set encoding=UTF-8
   "set macligatures
