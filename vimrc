@@ -47,7 +47,6 @@ else
   Plug 'junegunn/vim-slash'
   Plug 'tpope/vim-commentary'
   Plug 'sheerun/vim-polyglot'
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'machakann/vim-sandwich'
   Plug 'bkad/CamelCaseMotion'
   Plug 'PeterRincker/vim-searchlight'
@@ -80,8 +79,9 @@ else
   set laststatus=2
   set backspace=2
   set background=dark
+  set clipboard=unnamedplus
+  set confirm
   syntax on
-  colorscheme onedark
   let g:vitality_fix_focus=0
   set encoding=UTF-8
   "set macligatures
@@ -164,5 +164,7 @@ else
 
   if has('nvim')
     colorscheme onedark_vivid
+  else
+    colorscheme onedark
   endif
 endif

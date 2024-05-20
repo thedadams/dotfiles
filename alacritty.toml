@@ -44,7 +44,7 @@ vi_mode_style = "Block"
 shape = "Beam"
 
 [font]
-size = 11.5
+size = 12
 
 [font.normal]
 family = "VictorMono NFP"
