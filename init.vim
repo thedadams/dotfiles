@@ -2,6 +2,8 @@ set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
 source ~/.vimrc
 
+autocmd VimLeave * set guicursor= | call chansend(v:stderr, "\x1b[ q")
+
 lua << EOF
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all" (the five listed parsers should always be installed)
