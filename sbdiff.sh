@@ -1,5 +1,4 @@
 #!/bin/sh
-#!/bin/sh
 echo
 echo Comparing: "$1 between $3 and $6"
 echo
