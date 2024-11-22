@@ -52,6 +52,8 @@ COMPLETION_WAITING_DOTS="true"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
+EDITOR="fleet --wait"
+KUBE_EDITOR="$EDITOR"
 GOPATH="$HOME/go"
 PATH="$HOME/bin:$HOME/.cargo/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:$GOPATH/bin"
 MANPATH="/usr/local/man:$MANPATH"
@@ -114,10 +116,10 @@ source $ZSH/oh-my-zsh.sh
 
 alias py="python3"
 alias piip="pip3"
-alias e="open -a MacVim.app $1"
 alias java="java -cp ."
 alias javac="javac -cp ."
-alias update_all="pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U;tlmgr update --self --all;bubu;"
+alias kubectl="EDITOR=\"$EDITOR\" kubectl"
+alias fw="fleet --wait"
 
 # Keypad
 # 0 . Enter
@@ -146,30 +148,30 @@ bindkey -s "^[Oo" "/"
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 function set_win_title() {
-    local cmd=" ($@)"
-    if [[ "$cmd" == " (starship_precmd)" || "$cmd" == " ()" ]]
+  local cmd=" ($@)"
+  if [[ "$cmd" == " (starship_precmd)" || "$cmd" == " ()" ]]
+  then
+    cmd=""
+  fi
+  if [[ $PWD == $HOME ]]
+  then
+    if [[ $SSH_TTY ]]
     then
-      cmd=""
-    fi
-    if [[ $PWD == $HOME ]]
-    then
-      if [[ $SSH_TTY ]]
-      then
-        echo -ne "\033]0; 🏛️ @ $HOSTNAME ~$cmd\a" < /dev/null
-      else
-        echo -ne "\033]0; 🏠 ~$cmd\a" < /dev/null
-      fi
+      echo -ne "\033]0; 🏛️ @ $HOSTNAME ~$cmd\a" </dev/null
     else
-      BASEPWD=$(basename "$PWD")
-      if [[ $SSH_TTY ]]
-      then
-        echo -ne "\033]0; 🌩️ $BASEPWD @ $HOSTNAME $cmd\a" < /dev/null
-      else
-        echo -ne "\033]0; 📁 $BASEPWD $cmd\a" < /dev/null
-      fi
+      echo -ne "\033]0; 🏠 ~$cmd\a" </dev/null
     fi
+  else
+    BASEPWD=$(basename "$PWD")
+    if [[ $SSH_TTY ]]
+    then
+      echo -ne "\033]0; 🌩️ $BASEPWD @ $HOSTNAME $cmd\a" </dev/null
+    else
+      echo -ne "\033]0; 📁 $BASEPWD $cmd\a" </dev/null
+    fi
+  fi
 
-  }
+}
 precmd_functions+=(set_win_title)
 export STARSHIP_CONFIG=$HOME/.starship.toml
 eval "$(starship init zsh)"
