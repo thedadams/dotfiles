@@ -54,6 +54,7 @@ COMPLETION_WAITING_DOTS="true"
 
 EDITOR="fleet --wait"
 KUBE_EDITOR="$EDITOR"
+OTTO8_EDITOR="$EDITOR"
 GOPATH="$HOME/go"
 PATH="$HOME/bin:$HOME/.cargo/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:$GOPATH/bin"
 MANPATH="/usr/local/man:$MANPATH"
