@@ -6,8 +6,8 @@ pwd=`pwd`
 config_dir=${XDG_CONFIG_HOME:-~/.config}
 
 for f in $(ls); do
-    if [[ $f == "nvim" ]]; then
-        rm -rf $config_dir/nvim
+    if [[ $f == "nvim" || $f == "elvish" ]]; then
+        rm -rf $config_dir/$f
         mkdir -p $config_dir/
         ln -s $pwd/$f $config_dir/$f
     elif [[ $f != "install.sh" && $f != "sbdiff.sh" ]]; then
