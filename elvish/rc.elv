@@ -1,7 +1,3 @@
-use epm
-
-epm:install &silent-if-installed github.com/zzamboni/elvish-modules
-
 set E:HOMEBREW_PREFIX = /opt/homebrew
 set E:HOMEBREW_CELLAR = /opt/homebrew/Cellar
 set E:HOMEBREW_REPOSITORY = /opt/homebrew
@@ -57,7 +53,5 @@ set @edit:before-readline = $@edit:before-readline {
 
 ssh-add --apple-use-keychain $E:HOME/.ssh/id_rsa
 
-use github.com/zzamboni/elvish-modules/alias
-
-alias:new bubu brew update; brew outdated; brew upgrade
-alias:new fw fleet --wait
+fn bubu {|@_| brew update; brew outdated; brew upgrade}
+fn fw {|@a| fleet --wait $@a}
