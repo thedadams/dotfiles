@@ -55,3 +55,22 @@ ssh-add --apple-use-keychain $E:HOME/.ssh/id_rsa
 
 fn bubu {|@_| brew update; brew outdated; brew upgrade}
 fn fw {|@a| fleet --wait $@a}
+
+## Set the title to the current working directory.
+use str
+
+var start = "\e]0;"
+var end = "\007"
+
+fn set-title {|@title|
+  var title-str = (str:join ' ' $title)
+  print $start$title-str$end
+}
+
+var title-during-prompt = {
+  put "elvish "(tilde-abbr $pwd)
+}
+
+set after-chdir = [ $@after-chdir {|dir|
+    set-title ($title-during-prompt)
+  } ]
