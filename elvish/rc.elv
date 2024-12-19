@@ -7,7 +7,7 @@ set E:STARSHIP_CONFIG = $E:HOME/.starship.toml
 set E:TERM = xterm-256color
 set E:EDITOR = "fleet --wait"
 set E:KUBE_EDITOR = $E:EDITOR
-set E:OTTO8_EDITOR = $E:EDITOR
+set E:OBOT_EDITOR = $E:EDITOR
 set E:GOPATH = $E:HOME/go
 set E:MANPATH = /usr/local/man
 
@@ -32,7 +32,7 @@ set paths = [
 
 eval (starship init elvish)
 
-## hook for direnv
+# hook for direnv
 set @edit:before-readline = $@edit:before-readline {
 	try {
 		var m = [("/opt/homebrew/bin/direnv" export elvish | from-json)]
@@ -56,7 +56,7 @@ ssh-add --apple-use-keychain $E:HOME/.ssh/id_rsa
 fn bubu {|@_| brew update; brew outdated; brew upgrade}
 fn fw {|@a| fleet --wait $@a}
 
-## Set the title to the current working directory.
+# Set the title to the current working directory.
 use str
 
 var start = "\e]0;"
