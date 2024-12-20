@@ -74,3 +74,11 @@ var title-during-prompt = {
 set after-chdir = [ $@after-chdir {|dir|
     set-title ($title-during-prompt)
   } ]
+
+# Some personal keybindings
+set edit:insert:binding[Alt-Left] = $edit:move-dot-left-small-word~
+set edit:insert:binding[Alt-Right] = $edit:move-dot-right-small-word~
+set edit:insert:binding[Alt-Backspace] = $edit:kill-small-word-left~
+set edit:insert:binding[Shift+Alt-Backspace] = $edit:kill-small-word-right~
+set edit:insert:binding[Ctrl-Right] = $edit:move-dot-eol~
+set edit:insert:binding[Ctrl-Left] = $edit:move-dot-sol~
