@@ -5,7 +5,7 @@ set E:INFOPATH = /opt/homebrew/share/info
 set E:PYENV_VIRTUALENV_INIT = 1
 set E:STARSHIP_CONFIG = $E:HOME/.starship.toml
 set E:TERM = xterm-256color
-set E:EDITOR = "fleet --wait"
+set E:EDITOR = "windsurf --wait"
 set E:KUBE_EDITOR = $E:EDITOR
 set E:OBOT_EDITOR = $E:EDITOR
 set E:GOPATH = $E:HOME/go
@@ -28,6 +28,7 @@ set paths = [
     /usr/sbin
     /sbin
     $E:HOME/go/bin
+    $E:HOME/.codeium/windsurf/bin
 ]
 
 eval (starship init elvish)
@@ -55,6 +56,7 @@ ssh-add --apple-use-keychain $E:HOME/.ssh/id_rsa
 
 fn bubu {|@_| brew update; brew outdated; brew upgrade}
 fn fw {|@a| fleet --wait $@a}
+fn ww {|@a| windsurf --wait $@a}
 
 # Set the title to the current working directory.
 use str

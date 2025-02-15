@@ -180,3 +180,6 @@ eval "$(starship init zsh)"
 ### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
 export PATH="/Users/thedadams/.rd/bin:$PATH"
 ### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
+
+# Added by Windsurf
+export PATH="/Users/thedadams/.codeium/windsurf/bin:$PATH"
