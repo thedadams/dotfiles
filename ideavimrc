@@ -2,3 +2,6 @@ Plug 'tpope/vim-surround'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-commentary'
 set ideajoin
+map w [w
+map e ]w
+map b [b

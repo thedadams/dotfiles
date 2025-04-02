@@ -81,10 +81,9 @@ eval "$(direnv hook zsh)"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git copyfile brew droplr vscode pyenv)
 
-
 # Setup homebrew autocomplete
 if type brew &>/dev/null; then
-  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+    FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
 fi
 
 # User configuration
@@ -145,32 +144,35 @@ bindkey -s "^[Om" "-"
 bindkey -s "^[Oj" "*"
 bindkey -s "^[Oo" "/"
 
+# vi mode
+set -o vi
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 function set_win_title() {
-  local cmd=" ($@)"
-  if [[ "$cmd" == " (starship_precmd)" || "$cmd" == " ()" ]]
-  then
-    cmd=""
-  fi
-  if [[ $PWD == $HOME ]]
-  then
-    if [[ $SSH_TTY ]]
+    local cmd=" ($@)"
+    if [[ "$cmd" == " (starship_precmd)" || "$cmd" == " ()" ]]
     then
-      echo -ne "\033]0; 🏛️ @ $HOSTNAME ~$cmd\a" </dev/null
-    else
-      echo -ne "\033]0; 🏠 ~$cmd\a" </dev/null
+        cmd=""
     fi
-  else
-    BASEPWD=$(basename "$PWD")
-    if [[ $SSH_TTY ]]
+    if [[ $PWD == $HOME ]]
     then
-      echo -ne "\033]0; 🌩️ $BASEPWD @ $HOSTNAME $cmd\a" </dev/null
+        if [[ $SSH_TTY ]]
+        then
+            echo -ne "\033]0; 🏛️ @ $HOSTNAME ~$cmd\a" </dev/null
+        else
+            echo -ne "\033]0; 🏠 ~$cmd\a" </dev/null
+        fi
     else
-      echo -ne "\033]0; 📁 $BASEPWD $cmd\a" </dev/null
+        BASEPWD=$(basename "$PWD")
+        if [[ $SSH_TTY ]]
+        then
+            echo -ne "\033]0; 🌩️ $BASEPWD @ $HOSTNAME $cmd\a" </dev/null
+        else
+            echo -ne "\033]0; 📁 $BASEPWD $cmd\a" </dev/null
+        fi
     fi
-  fi
 
 }
 precmd_functions+=(set_win_title)
