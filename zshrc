@@ -183,5 +183,4 @@ eval "$(starship init zsh)"
 export PATH="/Users/thedadams/.rd/bin:$PATH"
 ### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
 
-# Added by Windsurf
-export PATH="/Users/thedadams/.codeium/windsurf/bin:$PATH"
+ssh-add --apple-use-keychain $HOME/.ssh/id_rsa
