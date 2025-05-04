@@ -65,7 +65,13 @@ PERL_MB_OPT="--install_base \"/usr/local/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/usr/local/perl5"; export PERL_MM_OPT;
 TERM=xterm-256color
 
-eval "$(/opt/homebrew/bin/brew shellenv)"
+# The shellenv commands for homebrew are different
+# based on mac and linux
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    eval "$(/usr/local/bin/brew shellenv)"
+elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
 
 # pyenv config
 export PYENV_ROOT="$HOME/.pyenv"
