@@ -68,7 +68,7 @@ TERM=xterm-256color
 # The shellenv commands for homebrew are different
 # based on mac and linux
 if [[ "$OSTYPE" == "darwin"* ]]; then
-    eval "$(/usr/local/bin/brew shellenv)"
+    eval "$(/opt/homebrew/bin/brew shellenv)"
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
