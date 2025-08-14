@@ -5,7 +5,11 @@ if (has-env XDG_CONFIG_HOME) {
 }
 
 for f [(ls)] {
-    if (or (eq $f nvim) (eq $f elvish)) {
+    if (eq $f zed-settings.json) {
+        rm -rf $config_dir/zed/$f
+        mkdir -p $config_dir/
+        ln -s $pwd/$f $config_dir/zed/$f
+    } elif (or (eq $f nvim) (eq $f elvish)) {
         echo Setting up $f
         rm -rf $config_dir/$f
         mkdir -p $config_dir/

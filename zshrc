@@ -52,7 +52,7 @@ COMPLETION_WAITING_DOTS="true"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-EDITOR="fleet --wait"
+EDITOR="zed --wait"
 KUBE_EDITOR="$EDITOR"
 OTTO8_EDITOR="$EDITOR"
 GOPATH="$HOME/go"
@@ -125,7 +125,7 @@ alias piip="pip3"
 alias java="java -cp ."
 alias javac="javac -cp ."
 alias kubectl="EDITOR=\"$EDITOR\" kubectl"
-alias fw="fleet --wait"
+alias zw="zed --wait"
 
 # Keypad
 # 0 . Enter
