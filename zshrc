@@ -190,3 +190,14 @@ export PATH="/Users/thedadams/.rd/bin:$PATH"
 ### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
 
 ssh-add --apple-use-keychain $HOME/.ssh/id_rsa
+
+fpath=($HOME/.nix-profile/share/zsh/site-functions $fpath)
+
+# Nix
+if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+    . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+    PATH=$PATH:/nix/var/nix/profiles/default/bin
+fi
+# End Nix
+
+alias claude="/Users/thedadams/.claude/local/claude"
