@@ -20,6 +20,7 @@
     "edit_prediction_provider": "copilot"
   },
   "terminal": {
+    "dock": "right",
     "cursor_shape": "bar"
   },
   "languages": {
