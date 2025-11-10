@@ -47,6 +47,12 @@
     "edit_prediction_provider": "zed"
   },
   "terminal": {
+    "shell": {
+      "with_arguments": {
+        "program": "/opt/homebrew/bin/nu",
+        "args": ["--config", "~/.config.nu", "--env-config", "~/.env.nu"]
+      }
+    },
     "dock": "right",
     "cursor_shape": "bar"
   },
