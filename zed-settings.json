@@ -3,7 +3,7 @@
   "title_bar": {
     "show_branch_icon": true
   },
-  "icon_theme": "Catppuccin Frappé",
+  "icon_theme": "Bearded Icon Theme",
   "file_types": {
     "Dockerfile": ["Dockerfile*"],
     "Git Attributes": ["{git,.git,.git/info}/attributes"],
