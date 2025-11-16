@@ -20,6 +20,8 @@ use std/util "path add"
 
 $env.EDITOR = "zed -w"
 
+$env.config.buffer_editor = ["zed", "-w"]
+
 $env.GOPATH = ($env.HOME | path join "go")
 
 path add "/opt/homebrew/bin"
@@ -30,6 +32,7 @@ path add "/usr/local/sbin"
 path add "/usr/bin:/bin"
 path add "/usr/sbin"
 path add "/sbin"
+path add "~/.rd/bin"
 path add ($env.GOPATH | path join "bin")
 
 $env.config.edit_mode = 'vi'
