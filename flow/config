@@ -52,10 +52,13 @@ gutter_line_numbers_mode "absolute"
 # terminal_TERM "xterm-256color"
 # value type: quoted string
 
-# terminal_scrollback_size 1000
+# terminal_scrollback_mb 8
 # value type: positive integer up to 65535
 
 # terminal_persist_scrollback true
+# value type: true or false
+
+# terminal_reflow_on_resize true
 # value type: true or false
 
 # terminal_on_exit "hold_on_error"
@@ -197,7 +200,8 @@ enable_format_on_save true
 # indent_size 4
 # value type: positive integer
 
-# tab_width 8
+tab_width 4
+# default value: 8
 # value type: positive integer
 
 # indent_mode "auto"
