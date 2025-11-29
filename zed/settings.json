@@ -32,7 +32,7 @@
     "copilot": {
       "enable_next_edit_suggestions": true,
     },
-    "provider": "zed",
+    "provider": "copilot",
   },
   "inlay_hints": {
     "enabled": true,
@@ -162,7 +162,7 @@
       "effort": "high",
       "enable_thinking": true,
       "provider": "openai-subscribed",
-      "model": "gpt-5.6-terra",
+      "model": "gpt-5.6-sol",
     },
     "use_modifier_to_send": false,
   },
