@@ -18,10 +18,10 @@
 # them for future reference.
 use std/util "path add"
 
-$env.EDITOR = "flow"
-$env.JJ_EDITOR = "flow"
+$env.EDITOR = "fresh"
+$env.JJ_EDITOR = "fresh"
 
-$env.config.buffer_editor = ["flow"]
+$env.config.buffer_editor = ["fresh"]
 
 $env.GOPATH = ($env.HOME | path join "go")
 
