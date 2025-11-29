@@ -2,16 +2,16 @@
 
 set -ex
 
-pwd=`pwd`
+pwd=$(pwd)
 config_dir=${XDG_CONFIG_HOME:-~/.config}
 
-for f in $(ls); do
-    if [[ $f == "nvim" || $f == "jj" || $f == "zed" || $f == "zellij" || $f == "jjui" || $f == "ghostty" || $f == "hunk" || $f == "fresh" || $f == "tuicr" ]]; then
-        rm -rf $config_dir/$f
-        mkdir -p $config_dir/
-        ln -s $pwd/$f $config_dir/$f
-    elif [[ $f != "install.sh" ]]; then
-        rm -rf $HOME/.$f
-        ln -s $pwd/$f $HOME/.$f
+for f in *; do
+    if [ -d "$f" ]; then
+        rm -rf "$config_dir/$f"
+        mkdir -p "$config_dir"
+        ln -s "$pwd/$f" "$config_dir/$f"
+    elif [ "$f" != "install.sh" ]; then
+        rm -rf "$HOME/.$f"
+        ln -s "$pwd/$f" "$HOME/.$f"
     fi
 done
