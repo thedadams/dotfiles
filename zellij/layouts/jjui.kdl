@@ -3,10 +3,18 @@ layout {
         plugin location="zellij:tab-bar"
     }
     pane split_direction="vertical" {
-        pane {
-            name "jjui"
-            command "/opt/homebrew/bin/nu"
-            args "--config" "/Users/thedadams/.config.nu" "--env-config" "/Users/thedadams/.env.nu" "-c" "jjui"
+        pane split_direction="horizontal" {
+            pane {
+                name "opencode"
+                command "/opt/homebrew/bin/nu"
+                args "--config" "/Users/thedadams/.config.nu" "--env-config" "/Users/thedadams/.env.nu" "-c" "opencode"
+                start_suspended true
+            }
+            pane {
+                name "jjui"
+                command "/opt/homebrew/bin/nu"
+                args "--config" "/Users/thedadams/.config.nu" "--env-config" "/Users/thedadams/.env.nu" "-c" "jjui"
+            }
         }
         pane {}
     }
