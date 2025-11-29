@@ -140,6 +140,9 @@ keybinds clear-defaults=true {
             SwitchToMode "normal"
         }
     }
+    shared {
+        bind "Super c" { Copy; }
+    }
     shared_except "locked" {
         bind "Alt left" { MoveFocusOrTab "left"; }
         bind "Alt down" { MoveFocus "down"; }
@@ -341,7 +344,7 @@ default_shell "/Users/thedadams/.nu"
 //   - true (default)
 //   - false
 //
-// mouse_mode false
+mouse_mode true
 
 // Toggle having pane frames around the panes
 // Options:
@@ -386,7 +389,7 @@ default_shell "/Users/thedadams/.nu"
 // copy_command "wl-copy"                    // wayland
 // copy_command "pbcopy"                     // osx
 //
-copy_command "pbcopy"
+// copy_command "pbcopy"
 
 // Choose the destination for copied text
 // Allows using the primary selection buffer (on x11/wayland) instead of the system clipboard.
@@ -400,7 +403,7 @@ copy_command "pbcopy"
 // Enable automatic copying (and clearing) of selection when releasing mouse
 // Default: true
 //
-// copy_on_select true
+copy_on_select false
 
 // Path to the default editor to use to edit pane scrollbuffer
 // Default: $EDITOR or $VISUAL

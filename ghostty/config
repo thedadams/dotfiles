@@ -28,7 +28,7 @@
 
 auto-update-channel = tip
 
-command = /opt/homebrew/bin/nu --config ~/.config.nu --env-config ~/.env.nu
+command = /opt/homebrew/bin/zellij
 
 keybind = shift+enter=text:\x1b\r
 
