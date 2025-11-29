@@ -97,7 +97,11 @@ set -o vi
 
 precmd_functions+=(set_win_title)
 
-ssh-add --apple-use-keychain $HOME/.ssh/id_rsa
+ssh-add -l >/dev/null 2>&1
+if [[ $? -eq 2 ]]; then
+    eval "$(ssh-agent -s)" >/dev/null
+fi
+ssh-add --apple-use-keychain "$HOME/.ssh/id_rsa"
 
 fpath=($HOME/.nix-profile/share/zsh/site-functions $fpath)
 
