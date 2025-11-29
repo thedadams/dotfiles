@@ -1,4 +1,5 @@
 {
+  "code_lens": "on",
   "semantic_tokens": "off",
   "global_lsp_settings": {
     "semantic_token_rules": [
