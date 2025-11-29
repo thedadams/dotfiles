@@ -42,15 +42,6 @@
       "args": [],
       "projects": [
         {
-          "paths": ["/Users/thedadams/.openclaw/./"],
-        },
-        {
-          "paths": ["/Users/thedadams/code"],
-        },
-        {
-          "paths": ["/Users/thedadams/code/astro"],
-        },
-        {
           "paths": ["/Users/thedadams/code/gleam-mcp"],
         },
         {
@@ -75,13 +66,6 @@
     "Git Attributes": ["{git,.git,.git/info}/attributes"],
     "Git Config": ["{git,.git/modules,.git/modules/*}/config"],
     "Git Ignore": ["{git,.git}/ignore", ".git/info/exclude"],
-  },
-  "lsp": {
-    "wakatime": {
-      "initialization_options": {
-        "api-key": "<API_KEY>",
-      },
-    },
   },
   "agent": {
     "dock": "right",
@@ -109,8 +93,8 @@
     },
     "default_profile": "write",
     "default_model": {
-      "provider": "copilot_chat",
-      "model": "claude-sonnet-4.6",
+      "provider": "openai",
+      "model": "gpt-5.5",
     },
     "use_modifier_to_send": false,
   },
