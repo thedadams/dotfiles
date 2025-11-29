@@ -105,6 +105,12 @@
       "modifiers": ["ctrl"],
       "action": "open",
       "when": "mode:vi-normal"
+    },
+    {
+      "key": "b",
+      "modifiers": ["super"],
+      "action": "toggle_file_explorer",
+      "when": "mode:vi-normal"
     }
   ],
   "plugins": {
@@ -162,5 +168,8 @@
   },
   "terminal": {
     "shell": { "command": "/opt/homebrew/bin/nu", "args": ["--config", "~/.config.nu", "--env-config", "~/.env.nu"] }
+  },
+  "file_explorer": {
+    "show_hidden": true
   }
 }

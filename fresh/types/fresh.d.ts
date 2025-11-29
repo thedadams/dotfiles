@@ -1081,6 +1081,20 @@ type CreateWindowWithTerminalOptions = {
 	* describe a boundary that isn't there.
 	*/
 	allowScript?: boolean;
+	/**
+	* Seed the terminal into this **existing** window — one created by
+	* `createPreparingWindow` — instead of opening a new one. The window
+	* keeps its id, its durable `stableId`, and everything keyed off them
+	* (a manual rename, its folder, its dock position), so a workspace the
+	* user has been looking at (and organising) since they asked for it
+	* becomes the live session rather than being replaced by one.
+	*
+	* `root` still applies: a workspace opens as a placeholder before its
+	* worktree exists, so adopting it re-roots the window at the directory
+	* that was finally created. Ignored — and the call falls back to
+	* creating a fresh window — when the id names no preparing window.
+	*/
+	adoptWindow?: number;
 };
 type SessionWithTerminalResult = {
 	/**
@@ -1100,6 +1114,39 @@ type SessionWithTerminalResult = {
 	* The seeded terminal buffer's id.
 	*/
 	bufferId: number;
+};
+type CreatePreparingWindowOptions = {
+	/**
+	* Absolute path the placeholder window roots at. It must exist — use
+	* the project directory when the workspace's own directory is what is
+	* still being created; the adopt step re-roots the window onto the
+	* final directory.
+	*/
+	root: string;
+	/**
+	* Human-readable label. Empty defaults to the basename of `root`.
+	*/
+	label: string;
+	/**
+	* Progress line shown on the placeholder page.
+	*/
+	message: string;
+	/**
+	* Focus the new window immediately. `false` (the default) builds it in
+	* the background and leaves the user where they are.
+	*/
+	activate?: boolean;
+};
+type PreparingWindowResult = {
+	/**
+	* The new window's id — a per-process handle, valid until this editor
+	* exits.
+	*/
+	windowId: number;
+	/**
+	* The new workspace's durable identity (`ws-…`), stable across restarts.
+	*/
+	stableId: string;
 };
 type CreateTerminalOptions = {
 	/**
@@ -1639,6 +1686,28 @@ type WidgetSpec = {
 	* button looks under the pointer.
 	*/
 	bare: boolean;
+	/**
+	* Stretch the button across the full width it is laid out in
+	* (the panel's content width, or its share of an enclosing
+	* `Row`), padding the label with spaces — and truncating it
+	* with an `…` when the width can't hold it.
+	*
+	* This exists because focus / hover paint the button's *own*
+	* cells: a natural-width button leaves the rest of its row
+	* unhighlighted even when the surrounding container pads the
+	* row out (a `LabeledSection` pads every child to its inner
+	* width). Dropdown and context-menu entries are rows of a
+	* menu, not free-standing actions, so their highlight has to
+	* span the row — set this on them and the host fills the row
+	* at the width it actually rendered, with no plugin-side
+	* width guess to drift on a resize or a dock drag.
+	*
+	* Leave it off for a free-standing action, and off for
+	* anything inside an anchored popup that sizes itself to its
+	* content — filling there stretches the popup to the whole
+	* panel width.
+	*/
+	fullWidth: boolean;
 	/**
 	* Style applied while the pointer is over this button. `None`
 	* (the default) leaves it looking the same hovered as not.
@@ -4680,6 +4749,27 @@ interface EditorAPI {
 	* agent terminal.
 	*/
 	createWindowWithTerminal(opts: CreateWindowWithTerminalOptions): Promise<SessionWithTerminalResult>;
+	/**
+	* Open a workspace *before* its contents exist: a real window (own id,
+	* durable stable id, label, authority) showing a "still being built"
+	* placeholder page. Focus can move into it right away, and the dock
+	* row is a full workspace — renameable, filable, closable — while the
+	* slow part (a `git worktree add`, say) runs behind it.
+	* 
+	* Narrate progress with `setWindowPreparing`, then hand the id to
+	* `createWindowWithTerminal` as `adoptWindow` to turn the placeholder
+	* into the live session in place, ids and all.
+	*/
+	createPreparingWindow(opts: CreatePreparingWindowOptions): Promise<PreparingWindowResult>;
+	/**
+	* Update the progress line (and displayed name) on a preparing window
+	* — `failed` switches it to the error copy — or clear the preparing
+	* state with `done` so the window renders as an ordinary session
+	* again. An empty `label` leaves the displayed name alone.
+	* 
+	* Returns `false` only when the channel to the editor is closed.
+	*/
+	setWindowPreparing(id: number, message: string, label: string | null, failed: boolean, done: boolean): boolean;
 	/**
 	* Send input data to a terminal
 	*/
