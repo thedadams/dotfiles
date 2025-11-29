@@ -75,29 +75,51 @@
     "sidebar_side": "right",
     "tool_permissions": {
       "tools": {
+        "fetch": {
+          "always_allow": [
+            {
+              "pattern": "^https?://raw\\.githubusercontent\\.com",
+            },
+            {
+              "pattern": "^https?://api\\.github\\.com",
+            },
+          ],
+        },
         "terminal": {
           "always_allow": [
             {
-              "pattern": "^gofmt\\b"
+              "pattern": "^gofmt\\b",
             },
             {
-              "pattern": "^go\\s+test(\\s|$)"
+              "pattern": "^go\\s+test(\\s|$)",
             },
             {
-              "pattern": "^go\\s+generate(\\s|$)"
+              "pattern": "^go\\s+generate(\\s|$)",
             },
             {
-              "pattern": "^python3\\s+mcpwn\\.py(\\s|$)"
+              "pattern": "^python3\\s+mcpwn\\.py(\\s|$)",
             },
             {
-              "pattern": "^jj\\s+status(\\s|$)"
+              "pattern": "^jj\\s+status(\\s|$)",
             },
             {
-              "pattern": "^grep\\b"
-            }
-          ]
-        }
-      }
+              "pattern": "^grep\\b",
+            },
+            {
+              "pattern": "^git\\s+--no-pager\\s+(status|diff|show)(\\s|$)",
+            },
+            {
+              "pattern": "^make\\s+test(\\s|$)",
+            },
+            {
+              "pattern": "^tail\\b",
+            },
+            {
+              "pattern": "^make\\s+lint-go(\\s|$)",
+            },
+          ],
+        },
+      },
     },
     "dock": "right",
     "inline_assistant_model": {
@@ -124,6 +146,7 @@
     },
     "default_profile": "write",
     "default_model": {
+      "effort": "high",
       "enable_thinking": true,
       "provider": "openai-subscribed",
       "model": "gpt-5.5",
@@ -154,7 +177,7 @@
     },
   },
   "theme": {
-    "mode": "system",
+    "mode": "dark",
     "light": "Flexoki Light",
     "dark": "Flexoki Dark",
   },
