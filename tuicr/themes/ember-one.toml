@@ -1,0 +1,55 @@
+# Ember One for tuicr
+# Adapted from the active Ghostty `ember-one` palette.
+
+panel_bg = "#20242c"
+bg_highlight = "#3f4f66"
+
+fg_primary = "#e1e6ec"
+fg_secondary = "#d7dce2"
+fg_dim = "#6f7785"
+
+diff_add = "#a7c76f"
+diff_add_bg = "#2b3329"
+diff_del = "#e85d75"
+diff_del_bg = "#3a272f"
+diff_context = "#e1e6ec"
+diff_hunk_header = "#69b4ff"
+expanded_context_fg = "#6f7785"
+
+syntax_add_bg = "#2b3329"
+syntax_del_bg = "#3a272f"
+syntax_theme = "ember-one-syntax.tmTheme"
+
+file_added = "#a7c76f"
+file_modified = "#e7c664"
+file_deleted = "#e85d75"
+file_renamed = "#d18cff"
+
+reviewed = "#a7c76f"
+pending = "#e7c664"
+
+comment_note = "#69b4ff"
+comment_suggestion = "#56d6c2"
+comment_issue = "#e85d75"
+comment_praise = "#c6e48b"
+
+border_focused = "#f58b45"
+border_unfocused = "#3f4f66"
+
+status_bar_bg = "#1f222a"
+cursor_color = "#f58b45"
+cursor_line_bg = "#2a303a"
+branch_name = "#d18cff"
+help_indicator = "#6f7785"
+
+message_info_fg = "#1f222a"
+message_info_bg = "#69b4ff"
+message_warning_fg = "#1f222a"
+message_warning_bg = "#e7c664"
+message_error_fg = "#1f222a"
+message_error_bg = "#ff7a90"
+
+update_badge_fg = "#1f222a"
+update_badge_bg = "#f58b45"
+mode_fg = "#1f222a"
+mode_bg = "#f58b45"
