@@ -62,7 +62,7 @@
       "preferred_line_length": 80
     }
   },
-  "theme": "One Dark",
+  "theme": "Flexoki Dark",
   "vim_mode": true,
   "vim": {
     "use_system_clipboard": "never"
