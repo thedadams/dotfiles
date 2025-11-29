@@ -18,9 +18,9 @@
 # them for future reference.
 use std/util "path add"
 
-$env.EDITOR = "hx"
+$env.EDITOR = "nvim"
 
-$env.config.buffer_editor = ["whx"]
+$env.config.buffer_editor = ["nvim"]
 
 $env.GOPATH = ($env.HOME | path join "go")
 
