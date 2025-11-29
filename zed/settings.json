@@ -1,5 +1,5 @@
 {
-  "semantic_tokens": "combined",
+  "semantic_tokens": "off",
   "global_lsp_settings": {
     "semantic_token_rules": [
       {
@@ -56,7 +56,7 @@
     "show_branch_status_icon": true,
   },
   "icon_theme": {
-    "mode": "light",
+    "mode": "system",
     "light": "Colored Zed Icons Theme Dark",
     "dark": "Colored Zed Icons Theme Dark",
   },
