@@ -7,7 +7,7 @@ email = "donnie@thedadams.com"
 [signing]
 backend = "ssh"
 behavior = "own"
-key = "/Users/thedadams/.ssh/id_rsa"
+key = "~/.ssh/id_rsa"
 
 [templates]
 commit_trailers = '''
