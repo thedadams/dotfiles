@@ -71,6 +71,40 @@
       "modifiers": ["alt"],
       "action": "close_tab",
       "when": "mode:vi-normal"
+    },
+    {
+      "key": "f",
+      "modifiers": ["shift", "super"],
+      "action": "start_git_grep",
+      "when": "normal"
+    },
+    {
+      "key": "f",
+      "modifiers": ["shift", "super"],
+      "action": "open_live_grep",
+      "when": "normal"
+    },
+    {
+      "key": "f",
+      "modifiers": ["shift", "super"],
+      "action": "open_live_grep",
+      "when": "mode:vi-normal"
+    },
+    {
+      "key": "Escape",
+      "action": "clear_search",
+      "when": "mode:vi-normal"
+    },
+    {
+      "key": "Escape",
+      "action": "noop",
+      "when": "mode:vi-normal"
+    },
+    {
+      "key": "o",
+      "modifiers": ["ctrl"],
+      "action": "open",
+      "when": "mode:vi-normal"
     }
   ],
   "plugins": {

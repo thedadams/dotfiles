@@ -274,6 +274,19 @@ export type OrchestratorApi = {
 	*  needs to find the one it made earlier, or to report on all of them.
 	*  Reads the live model, so it reflects creations made moments ago. */
 	listWorkspaces(): WorkspaceSummary[];
+	/** Focus a workspace by its durable `workspaceId` (or its `windowId`) —
+	*  what `listWorkspaces()` reports.
+	*
+	*  Use this rather than `editor.setActiveWindow(w.windowId)`. A workspace
+	*  discovered on disk but never activated has no window yet, and
+	*  `listWorkspaces()` reports a placeholder *negative* `windowId` for it,
+	*  which `setActiveWindow` rejects. This attaches a session at the worktree
+	*  first when that is what the row needs, so one call works for every row
+	*  the list returns.
+	*
+	*  Resolves `true` once the workspace is active, `false` if no workspace
+	*  matches. */
+	focusWorkspace(target: string | number): Promise<boolean>;
 };
 declare global {
 	interface FreshPluginRegistry {

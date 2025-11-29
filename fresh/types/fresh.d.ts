@@ -117,10 +117,23 @@ type TextPropertyEntry = {
 	*/
 	inlineOverlays?: Array<InlineOverlay>;
 	/**
+	* Pad this entry's text with spaces to this many columns when drawing.
+	*
+	* **Render-only**: the padding is applied at draw time, so
+	* `getBufferText()` returns the unpadded text you supplied. Column
+	* alignment cannot be checked by reading the buffer back — if you need
+	* that, embed real spaces with `padEnd` instead.
+	*
 	* See `TextPropertyEntry::pad_to_chars`.
 	*/
 	padToChars?: number;
 	/**
+	* Truncate this entry's text to at most this many columns when drawing,
+	* with an ellipsis when the budget allows one.
+	*
+	* **Render-only**, like `padToChars`: `getBufferText()` returns the full
+	* untruncated text.
+	*
 	* See `TextPropertyEntry::truncate_to_chars`.
 	*/
 	truncateToChars?: number;
@@ -581,6 +594,18 @@ type BufferInfo = {
 	*/
 	path: string;
 	/**
+	* The buffer's display name — what the tab shows.
+	*
+	* For a file buffer this is the filename (or project-relative path). For
+	* a **virtual buffer it is the `name` you passed to
+	* `createVirtualBuffer`**, which is how a plugin finds its own panel
+	* again: `listBuffers().find(b => b.is_virtual && b.name === "…")`.
+	* Before this field existed the only handle was
+	* `is_virtual && path === ""`, which cannot tell two plugins' panels
+	* apart — or two panels of your own.
+	*/
+	name: string;
+	/**
 	* Whether the buffer has been modified
 	*/
 	modified: boolean;
@@ -818,6 +843,44 @@ type ActionPopupOptions = {
 	*/
 	buffer_id?: number;
 };
+type AddMenuItemOptions = {
+	/**
+	* Target menu, matched against each menu's stable `id` ("View",
+	* "File", …) first and its display label second. A menu that matches
+	* neither is left alone and the call is a no-op.
+	*/
+	menu: string;
+	/**
+	* Row label, already localised by the plugin (`editor.t(…)`).
+	*/
+	label: string;
+	/**
+	* Action dispatched when the row is chosen. A name the editor doesn't
+	* know is routed to the plugin action of the same name — i.e. the
+	* handler registered with `registerHandler`.
+	*/
+	action: string;
+	/**
+	* Menu-context key whose boolean value renders the row's checkmark
+	* (e.g. `"dock"`). Omit for a plain action row.
+	*/
+	checkbox?: string;
+	/**
+	* Menu-context key gating whether the row is enabled. Omit for a row
+	* that is always available.
+	*/
+	when?: string;
+	/**
+	* Insert directly after the existing row whose action or label this
+	* names. Ignored when nothing matches (the row is appended instead).
+	*/
+	after?: string;
+	/**
+	* Insert directly before the existing row whose action or label this
+	* names. Ignored when `after` is set, or when nothing matches.
+	*/
+	before?: string;
+};
 type TsLspMenuItem = {
 	/**
 	* Stable identifier used as the `action_id` in the resulting
@@ -1044,7 +1107,11 @@ type CreateTerminalOptions = {
 	*/
 	cwd?: string;
 	/**
-	* Split direction: "horizontal" or "vertical" (default: "vertical")
+	* Split direction: `"horizontal"` or `"vertical"` (default:
+	* `"vertical"`).
+	*
+	* The name describes the **divider**, not the arrangement:
+	* `"vertical"` puts the panes side by side, `"horizontal"` stacks them.
 	*/
 	direction?: string;
 	/**
@@ -1560,6 +1627,41 @@ type WidgetSpec = {
 	* are tabbable).
 	*/
 	focusable: boolean;
+	/**
+	* Render the label alone — no `[ ]` frame, no focus-marker
+	* gutter — turning the button into a bare *icon affordance*
+	* (a `×` close glyph, a `▾` chevron) rather than a framed
+	* action. Use it where the glyph itself is the control and a
+	* frame would read as clutter; keep the default `false` for
+	* anything with a word on it.
+	*
+	* This controls layout only; `hover_style` controls how the
+	* button looks under the pointer.
+	*/
+	bare: boolean;
+	/**
+	* Style applied while the pointer is over this button. `None`
+	* (the default) leaves it looking the same hovered as not.
+	*
+	* Hover is host state — it changes with mouse motion and no
+	* plugin round-trip — so the plugin declares the *appearance*
+	* once in the spec and the host applies it as the pointer
+	* moves. Nothing crosses the plugin bridge on a hover.
+	*
+	* It outranks focus styling while both apply: the pointer is
+	* the more immediate signal, and the one the user is actively
+	* driving.
+	*
+	* For a close glyph, `ui.tab_close_hover_fg` is the editor's
+	* shared "close affordance under the pointer" key — the tab
+	* `×` and the file explorer's `×` both read it, so a plugin
+	* naming it gets the same highlight users already know.
+	*
+	* `Button` is the first kind to carry this; other widget kinds
+	* adopt it with the same field plus a `ctx.is_hovered(key)`
+	* check in their renderer.
+	*/
+	hoverStyle?: Partial<OverlayOptions>;
 } | {
 	"kind": "spacer";
 	cols: number;
@@ -1781,6 +1883,23 @@ type WidgetSpec = {
 	* narrow surfaces.
 	*/
 	labelWidth: number;
+	/**
+	* Reject every mutating operation (typing, Backspace/Delete,
+	* Cut, Paste) while keeping caret motion, selection, and Copy.
+	* Implied by `markdown`.
+	*/
+	readOnly: boolean;
+	/**
+	* Render `value` as a markdown *document* (multi-line only,
+	* `rows > 1`): the host renders it through the same markdown
+	* engine as LSP hover docs — headings, emphasis, inline code,
+	* links, syntax-highlighted fences — word-wrapped to the
+	* widget's width. The caret, selection, and Copy operate on
+	* the rendered plain text, so what you copy is what you see.
+	* Markdown mode is **forcibly read-only**: the value only
+	* changes via a spec update.
+	*/
+	markdown: boolean;
 	key?: string | null;
 } | {
 	"kind": "labeledSection";
@@ -2070,7 +2189,11 @@ type CreateVirtualBufferInSplitOptions = {
 	*/
 	ratio?: number;
 	/**
-	* Split direction: "horizontal" or "vertical"
+	* Split direction: `"horizontal"` or `"vertical"`.
+	*
+	* The name describes the **divider**, not the arrangement:
+	* `"vertical"` puts the panes side by side (a vertical divider between
+	* them), `"horizontal"` stacks them. Same convention as `splitWindow`.
 	*/
 	direction?: string;
 	/**
@@ -2198,6 +2321,27 @@ type CreateVirtualBufferOptions = {
 	*/
 	indentationGuide?: boolean;
 };
+type DiffBaselineResult = {
+	/**
+	* The buffer content version the hunks were computed against (0 for
+	* baseline-pair diffs, which involve no live buffer). A plugin that
+	* renders decorations re-checks this against the buffer's current
+	* version instead of copying buffer text around for coherence.
+	*/
+	revision: bigint;
+	/**
+	* "exact": content-accurate line hunks. "byteCoarse": the buffer's
+	* line index isn't available yet (large file before its line-feed
+	* scan), so no line hunks could be produced; callers fall back to
+	* their own coarse rendering.
+	*/
+	fidelity: "exact" | "byteCoarse";
+	/**
+	* Line hunks, same contract as `computeLineDiff`. Empty means the
+	* sides are equal (when `fidelity` is "exact").
+	*/
+	hunks: Array<LineDiffHunk>;
+};
 type GrepMatch = {
 	/**
 	* Absolute file path
@@ -2262,6 +2406,24 @@ type LanguagePackConfig = {
 	* Formatter configuration
 	*/
 	formatter: FormatterPackConfig | null;
+};
+type LineDiffHunk = {
+	/**
+	* First affected line in the old text (0-based).
+	*/
+	oldStart: number;
+	/**
+	* Number of old-side lines in the hunk (0 for pure insertion).
+	*/
+	oldCount: number;
+	/**
+	* First affected line in the new text (0-based).
+	*/
+	newStart: number;
+	/**
+	* Number of new-side lines in the hunk (0 for pure deletion).
+	*/
+	newCount: number;
 };
 type LocalPath = {
 	kind: "local";
@@ -2361,6 +2523,17 @@ type ScrollbarMarker = {
 	* Optional exclusive end byte offset, making this a range marker.
 	*/
 	end?: number;
+	/**
+	* Optional 0-based end line, **inclusive**, making this a range marker.
+	* Ignored when `end` is present.
+	*
+	* The line counterpart to `end`, for producers that work in line
+	* coordinates — a `git diff` parser knows a hunk's first and last line
+	* but not their byte offsets. Without it such a plugin has to emit one
+	* marker per line to paint a hunk's streak, which costs a byte lookup
+	* and two anchors per line for a resolution the track cannot show.
+	*/
+	endLine?: number;
 	/**
 	* Marker color — RGB array or theme key. Theme keys resolve at render
 	* time, so markers follow theme changes.
@@ -2697,9 +2870,11 @@ interface EditorAPI {
 	*/
 	insertAtCursor(text: string): boolean;
 	/**
-	* Open a file, optionally at a specific line/column
+	* Open a file, optionally at a specific line/column.
+	* 
+	* `editor.openFile(path)` is the whole request most of the time.
 	*/
-	openFile(path: string, line: number | null, column: number | null): boolean;
+	openFile(path: string, line?: number | null, column?: number | null): boolean;
 	/**
 	* Open a file in the background — no focus change, no
 	* active-split mutation. `windowId` defaults to the active
@@ -2740,9 +2915,23 @@ interface EditorAPI {
 	*/
 	showBuffer(bufferId: number): boolean;
 	/**
-	* Close a buffer
+	* Close a buffer. Pass `force: true` to discard unsaved changes.
+	* 
+	* **A modified buffer is not closed** unless `force` is set — the user's
+	* unsaved edits are not a plugin's to throw away. A scratch buffer the
+	* plugin created and filled itself counts as modified, so disposing of
+	* one needs `closeBuffer(id, true)`.
+	* 
+	* The returned boolean is **"the request was delivered"**, not "the
+	* buffer closed": this call is fire-and-forget, and the editor decides
+	* afterwards. A refusal is logged editor-side but is invisible here, so
+	* confirm with `listBuffers()` (after `await editor.flush()`) when it
+	* matters. Without `force` the sequence that used to be required was
+	* delete-the-contents, `saveBufferToPath`, then close — three
+	* round-trips, the first two of which returned `true` while achieving
+	* nothing.
 	*/
-	closeBuffer(bufferId: number): boolean;
+	closeBuffer(bufferId: number, force?: boolean | null): boolean;
 	/**
 	* Close other buffers in split
 	*/
@@ -2880,6 +3069,20 @@ interface EditorAPI {
 	* lengths / regex match indices to the byte offsets the editor expects.
 	*/
 	utf8ByteLength(text: string): number;
+	/**
+	* Line-level diff of two texts (native patience diff; see
+	* `fresh_core::diff`). Returns hunks of differing line ranges in
+	* increasing order; equal regions are not reported. Lines are
+	* 0-indexed `\n`-terminated segments (a final unterminated segment
+	* counts as a line), matching the `text.split("\n")`-and-drop-
+	* trailing-empty convention plugins already use for line arrays.
+	* 
+	* Never refuses an input: pathological chunks degrade to coarser
+	* hunks instead of failing, so callers don't need a "diff too
+	* large" path. Runs synchronously on the plugin thread — cost is
+	* near-linear in input size, far below the JS it replaces.
+	*/
+	computeLineDiff(oldText: string, newText: string): LineDiffHunk[];
 	/**
 	* Check if a file exists on the path's filesystem (a window's authority,
 	* or the local host for a `LocalPath`).
@@ -3501,6 +3704,24 @@ interface EditorAPI {
 	*/
 	prompt(label: string, initialValue: string): Promise<string | null>;
 	/**
+	* Open the editor's native Open File browser and wait for a pick
+	* (async) — the terminal analogue of a browser's file-input dialog.
+	* Resolves with the chosen file's absolute path, or null if the
+	* user cancels. The browser anchors where Open File does (the
+	* active file's directory, else the window's working directory),
+	* with the same navigation: Backspace walks up the tree, Tab
+	* descends into directories, and typed input filters or resolves
+	* as a path. No buffer is opened — the path is only returned.
+	* 
+	* `directory` anchors the browser somewhere else (a relative path
+	* resolves against the window's working directory) and typed
+	* relative input then resolves there too. `showHidden` overrides
+	* the config's dotfile visibility for this pick — pass `true` when
+	* the file being picked is itself a dotfile (a tour manifest, an
+	* editorconfig), which the default would hide.
+	*/
+	pickFile(label: string, directory?: string | null, showHidden?: boolean | null): Promise<string | null>;
+	/**
 	* Start an interactive prompt.
 	* 
 	* When `floatingOverlay` is true, the editor renders the prompt
@@ -3663,12 +3884,28 @@ interface EditorAPI {
 	* already active. Errors (id not found) are logged on the
 	* editor side; the JS caller can verify by reading
 	* `activeWindow()` after.
+	* 
+	* **Not every id you can read is a window id.** The orchestrator's
+	* `listWorkspaces()` reports a *negative* `windowId` for a workspace it
+	* discovered on disk but has never activated — there is no window yet,
+	* so the negative value is a placeholder, not a handle. Passing one here
+	* returns `false`; to open such a workspace use
+	* `getPluginApi("orchestrator").focusWorkspace(workspaceId)`, which
+	* attaches a session at the worktree first.
+	* 
+	* Returns `false` for any non-positive id rather than throwing. It used
+	* to be declared as an unsigned integer, so a negative id failed inside
+	* the JS→Rust conversion with `Error converting from js 'f64' into type
+	* 'u64': Underflow` — an exception, from a line that looked fine, naming
+	* nothing the caller had written.
 	*/
 	setActiveWindow(id: number): boolean;
 	/**
 	* Switch the active window with a directional wipe on the
 	* incoming content. `from_edge`: "top" | "bottom" | "left" |
 	* "right". See `PluginCommand::SetActiveWindowAnimated`.
+	* 
+	* Same id rules as `setActiveWindow`: a non-positive id returns `false`.
 	*/
 	setActiveWindowAnimated(id: number, fromEdge: string): boolean;
 	/**
@@ -3944,6 +4181,17 @@ interface EditorAPI {
 	*/
 	showActionPopup(opts: ActionPopupOptions): boolean;
 	/**
+	* Contribute a row to one of the menu bar's menus (e.g. a "Show Dock"
+	* toggle under "View"). The target menu and the neighbour named by
+	* `after` / `before` are matched by stable id (a menu `id`, an item's
+	* `action`) as well as by display label, so the placement survives a
+	* locale change. Naming a menu that doesn't exist is a no-op.
+	* 
+	* Takes a typed AddMenuItemOptions struct - serde validates field
+	* names at runtime.
+	*/
+	addMenuItem(opts: AddMenuItemOptions): boolean;
+	/**
 	* Contribute (or replace, or clear) menu rows for the LSP-Servers
 	* popup. Pass an empty `items` to clear this plugin's slice for
 	* the given language. See `PluginCommand::SetLspMenuContributions`.
@@ -4102,6 +4350,26 @@ interface EditorAPI {
 	/**
 	* Spawn a process (async, returns request_id)
 	* 
+	* **No shell is involved.** `command` is executed directly, so quoting,
+	* globbing, `|`, `&&`, `>` and `$VAR` are not interpreted — pass the
+	* program and its arguments already split:
+	* 
+	* ```js
+	* await editor.spawnProcess("gh", ["api", "graphql", "-f", query], repoDir);
+	* ```
+	* 
+	* Wrapping the call in `/bin/sh -lc "…"` to get shell behaviour is
+	* usually a mistake: a login shell sources the user's profile, which is
+	* slow and can block outright.
+	* 
+	* The child inherits the **editor's** environment, including `PATH`, so
+	* `git`, `gh` and anything else the user can run from their shell
+	* resolves by bare name — no absolute paths needed.
+	* 
+	* `cwd` is the third argument; without it the child inherits the
+	* editor's working directory, which is not necessarily the workspace you
+	* meant.
+	* 
 	* Optional 4th argument `stdoutTo: string` pipes the child's stdout
 	* directly into the named file instead of buffering it. The
 	* resolved `SpawnResult.stdout` is empty in that case; the bytes
@@ -4222,7 +4490,144 @@ interface EditorAPI {
 	*/
 	getBufferText(bufferId: number, start?: number, end?: number): Promise<string>;
 	/**
+	* Register a diff baseline for a buffer (async). `kind` is one of
+	* "saved" | "disk" | "gitRef" | "gitIndex"; `gitRef` carries the ref
+	* for kind "gitRef". Resolves with the baseline id once the
+	* reference content is loaded host-side — no file content ever
+	* crosses the plugin bridge. Baselines are dropped automatically
+	* when their buffer closes, or explicitly via
+	* `releaseDiffBaseline`.
+	*/
+	registerDiffBaseline(bufferId: number, kind: string, gitRef: string | null): Promise<number>;
+	/**
+	* Diff a buffer's live content against a registered baseline
+	* (async). Resolves with a `DiffBaselineResult`; check its
+	* `revision` against the buffer's current version before anchoring
+	* decorations on the hunks.
+	*/
+	diffAgainstBaseline(bufferId: number, baselineId: number): Promise<DiffBaselineResult>;
+	/**
+	* Diff two registered baselines against each other (async) — e.g.
+	* disk vs HEAD, the git-gutter comparison. Resolves with a
+	* `DiffBaselineResult` whose `revision` is 0.
+	*/
+	diffBaselinePair(oldBaselineId: number, newBaselineId: number): Promise<DiffBaselineResult>;
+	/**
+	* Fetch baseline lines for `(startLine, count)` ranges in one
+	* batched call (async). Lines come back without trailing newlines,
+	* grouped per requested range — fetch only the old-side lines a
+	* diff view actually renders.
+	*/
+	getBaselineLines(baselineId: number, ranges: number[][]): Promise<string[][]>;
+	/**
+	* Reload a baseline's reference content (async; call after a HEAD
+	* move or an external write). Resolves once the fresh content is
+	* serving.
+	*/
+	refreshDiffBaseline(baselineId: number): Promise<void>;
+	/**
+	* Drop a registered diff baseline.
+	*/
+	releaseDiffBaseline(baselineId: number): void;
+	/**
+	* Run `handlerName` every `intervalMs` milliseconds until cancelled.
+	* Returns a timer id for `clearInterval`.
+	* 
+	* The alternative — a detached `while (alive) { await editor.delay(ms);
+	* … }` loop — does work, and the bundled dashboard plugin uses one. But
+	* it puts three obligations on you that a timer discharges for free:
+	* 
+	* 1. **A throw anywhere in the loop body ends it, silently.** The loop
+	* is a detached async function, so the rejection has nowhere to
+	* surface; the panel simply stops updating, with nothing in the log
+	* pointing at why. Every `await` inside must be individually
+	* guarded. A timer handler's throw is caught and logged by the host,
+	* and the *next* tick still fires.
+	* 2. **You must cancel it yourself.** A loop keeps running after its
+	* plugin is unloaded or reloaded until its own guard notices, so it
+	* needs a liveness check that survives a reload — an identity check
+	* (`myBufferId === currentBufferId`), not a boolean, or a reopened
+	* panel ends up with two loops. Timers are cancelled on unload.
+	* 3. **The first iteration is one period late** unless you also do the
+	* work once before entering the loop.
+	* 
+	* A loop is still the better shape when each iteration's decision
+	* depends on the last one's result, or when you want a single ticker
+	* driving many items on their own schedules (again: see dashboard.ts,
+	* which ticks at 1s and re-runs a section only once its own TTL has
+	* expired, so cost scales with the sum of the sections' rates rather
+	* than tick-rate × section-count).
+	* 
+	* The handler is named, not passed as a function, for the same reason
+	* `registerCommand` takes a name: the host invokes it by looking it up
+	* on `globalThis`. Declare it with `registerHandler("myTick", fn)`.
+	* 
+	* The handler may be `async`; a fire is not awaited, and a slow handler
+	* does not delay the editor. Ticks are *not* queued — if a fire is
+	* still outstanding when the next is due, the next simply happens, so
+	* guard re-entrancy yourself (`if (inFlight) return;`) when a tick can
+	* outlast its period.
+	* 
+	* Timers are cancelled automatically when the owning plugin is unloaded
+	* or reloaded, so a hot-reload during development does not leave the
+	* previous copy ticking alongside the new one.
+	* 
+	* `intervalMs` is clamped to a floor (see `MIN_PLUGIN_TIMER_MS` in the
+	* host) so a `0` cannot spin the editor.
+	*/
+	setInterval(intervalMs: number, handlerName: string): number;
+	/**
+	* Run `handlerName` once, `delayMs` from now. Returns a timer id, so a
+	* pending one-shot can still be cancelled with `clearInterval`.
+	* 
+	* Same contract as `setInterval` — named handler, host-driven, cancelled
+	* on plugin unload. Use it when the continuation should happen whether
+	* or not the code that scheduled it is still around; use
+	* `await editor.delay(ms)` when you are pausing work you are already
+	* inside of and want to keep the local variables.
+	*/
+	setTimeout(delayMs: number, handlerName: string): number;
+	/**
+	* Cancel a timer from `setInterval` / `setTimeout`.
+	* 
+	* Returns `false` when this plugin holds no live timer under that id —
+	* which covers a typo, a double-cancel, and a one-shot that has already
+	* fired. None of those is an error, so none throws.
+	* 
+	* Only your own timers are cancellable: ids come from a counter shared
+	* across plugins, so accepting an arbitrary id would let one plugin stop
+	* another's refresh.
+	*/
+	clearInterval(timerId: number): boolean;
+	/**
 	* Delay/sleep (async, returns request_id)
+	* 
+	* Resolves after `durationMs`. Two things it is very good at:
+	* 
+	* - a pause inside work you are already inside of — a debounce, a retry
+	* backoff, a settle before reading state back;
+	* - a **timeout**, by racing it against the real work:
+	* ```js
+	* const timedOut = Symbol("timeout");
+	* const outcome = await Promise.race([
+	* doTheWork().then(() => "ok"),
+	* editor.delay(8000).then(() => timedOut),
+	* ]);
+	* ```
+	* which is how the bundled dashboard stops one slow section from
+	* stalling the panel.
+	* 
+	* For a *periodic background* task, weigh it against
+	* `editor.setInterval(ms, "handlerName")`. A detached
+	* `while (…) { await editor.delay(ms); … }` loop works, but it dies
+	* silently on the first unguarded throw, is not cancelled when the
+	* plugin unloads, and does its first iteration one period late — see
+	* `setInterval` for when each shape is the right one.
+	* 
+	* Note the loop keeps running after the plugin that created it is
+	* unloaded or reloaded, until its own guard notices. Gate it on an
+	* identity (`myBufferId === currentBufferId`) rather than a boolean, or
+	* reloading leaves two loops racing.
 	*/
 	delay(durationMs: number): Promise<void>;
 	/**
@@ -4321,6 +4726,54 @@ interface EditorAPI {
 		path: string;
 		enabled: boolean;
 	}>>;
+	/**
+	* Re-read `~/.config/fresh/init.ts` and run it — the scriptable form of
+	* the "init: Reload" palette command, and the same thing
+	* `fresh --cmd init reload` sends.
+	* 
+	* Use this rather than `reloadPlugin("init.ts")`: init.ts is not loaded
+	* from a path (its plugin path is the sentinel `<buffer:init.ts>`), so
+	* the by-name plugin reload cannot find it.
+	* 
+	* Reloading drops the previous init.ts's commands, handlers, event
+	* subscriptions and settings before the new source runs, so the
+	* author → reload → test loop needs no editor restart. Resolves `true`
+	* once the new source has run; rejects with the parse error if the file
+	* does not compile (the old init.ts stays live in that case).
+	* 
+	* Calling this *from* init.ts re-enters the reload; guard it if you do.
+	*/
+	reloadInit(): Promise<boolean>;
+	/**
+	* Run a registered command by the exact name it shows in the command
+	* palette — the same dispatch the palette performs on that row, so a
+	* command handler is exercised through its real path rather than by
+	* calling the plugin function directly.
+	* 
+	* Resolves `true` when the command was found and dispatched; rejects
+	* when no command carries that name (so a typo is an error, not a
+	* silent no-op). The command's *own* async work is not awaited — this
+	* resolves once dispatch happened, exactly like a keypress would.
+	* 
+	* `fresh --cmd command run "<name>"` is this call from a shell.
+	*/
+	runCommand(name: string): Promise<boolean>;
+	/**
+	* Every registered command — built-ins and plugin commands together —
+	* as `{ name, description, source, plugin }`, where `source` is
+	* `"builtin"` or `"plugin"` and `plugin` names the owner (empty for
+	* built-ins).
+	* 
+	* The point of this from a plugin's own script: confirming that your
+	* `registerCommand` actually landed, under the name you expect, before
+	* hunting for why the palette "doesn't show it".
+	*/
+	listCommands(): Promise<Array<{
+		name: string;
+		description: string;
+		source: string;
+		plugin: string;
+	}>>;
 }
 /**
 * Typed overload of `editor.getPluginApi`. When the caller passes a
@@ -4418,6 +4871,18 @@ interface HookEventMap {
 		buffer_id: number;
 	};
 	after_file_save: {
+		path: string;
+		buffer_id: number;
+	};
+	/**
+	* Fired after a buffer is reloaded from disk: auto-revert picked up an
+	* external change (e.g. `git checkout <ref> -- <file>` in another
+	* terminal), or the user ran an explicit revert. Reloads don't fire
+	* `after_file_save`, so plugins that surface disk-derived state
+	* (git gutter, etc.) should subscribe to this too or their decorations
+	* go stale on every external reset.
+	*/
+	after_file_revert: {
 		path: string;
 		buffer_id: number;
 	};
