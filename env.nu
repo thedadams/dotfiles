@@ -18,9 +18,10 @@
 # them for future reference.
 use std/util "path add"
 
-$env.EDITOR = "nvim"
+$env.EDITOR = "fresh"
+$env.JJ_EDITOR = "fresh"
 
-$env.config.buffer_editor = ["nvim"]
+$env.config.buffer_editor = ["fresh"]
 
 $env.GOPATH = ($env.HOME | path join "go")
 
@@ -28,6 +29,7 @@ path add ($env.HOME | path join "Executables")
 path add "/opt/homebrew/bin"
 path add "~/bin"
 path add "~/.cargo/bin"
+path add "~/.local/bin"
 path add "/usr/local/bin"
 path add "/usr/local/sbin"
 path add "/usr/bin:/bin"
@@ -36,4 +38,4 @@ path add "/sbin"
 path add "~/.rd/bin"
 path add ($env.GOPATH | path join "bin")
 
-$env.config.edit_mode = 'vi'
+$env.config.edit_mode = 'fresh'

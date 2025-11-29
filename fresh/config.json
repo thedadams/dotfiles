@@ -1,0 +1,13 @@
+{
+  "theme": "ember-one-fresh.json",
+  "editor": {
+    "font": "Berkeley Mono"
+  },
+  "plugins": {
+    "vi_mode": {
+      "settings": {
+        "autoStart": true
+      }
+    }
+  }
+}

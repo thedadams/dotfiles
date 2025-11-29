@@ -1,4 +1,4 @@
-EDITOR="nvim"
+EDITOR="fresh"
 KUBE_EDITOR="$EDITOR"
 GOPATH="$HOME/go"
 PATH="$HOME/bin:$HOME/.cargo/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:$GOPATH/bin"
