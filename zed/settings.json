@@ -8,13 +8,13 @@
     ],
   },
   "agent_servers": {
+    "opencode": {
+      "type": "registry",
+    },
     "github-copilot-cli": {
       "type": "registry",
     },
     "codex-acp": {
-      "type": "registry",
-    },
-    "opencode": {
       "type": "registry",
     },
     "github-copilot": {
@@ -48,6 +48,9 @@
           "paths": ["/Users/thedadams/code"],
         },
         {
+          "paths": ["/Users/thedadams/code/astro"],
+        },
+        {
           "paths": ["/Users/thedadams/code/gleam-mcp"],
         },
         {
@@ -59,7 +62,7 @@
   "buffer_font_weight": 400.0,
   "colorize_brackets": true,
   "title_bar": {
-    "show_branch_icon": true,
+    "show_branch_status_icon": true,
   },
   "icon_theme": {
     "mode": "light",
