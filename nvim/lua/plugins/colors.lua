@@ -1,11 +1,12 @@
 return {
     {
-        "kepano/flexoki-neovim",
-        name = "flexoki",
+        dir = vim.fn.stdpath("config"),
+        name = "ember-one",
+        lazy = false,
         priority = 1000,
         config = function()
-            vim.o.background = "dark"
-            vim.cmd.colorscheme("flexoki-dark")
+            vim.opt.termguicolors = true
+            vim.cmd.colorscheme("ember-one")
         end,
     },
 }

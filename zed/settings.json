@@ -179,7 +179,7 @@
   "theme": {
     "mode": "dark",
     "light": "Flexoki Light",
-    "dark": "Flexoki Dark",
+    "dark": "Ember One Dark",
   },
   "theme_overrides": {
     "Ayu Dark": {
