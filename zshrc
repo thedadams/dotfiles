@@ -110,3 +110,6 @@ fi
 
 alias claude="/Users/thedadams/.claude/local/claude"
 export PATH="$HOME/.local/bin:$PATH"
+
+# Added by codebase-memory-mcp install
+export PATH="/Users/thedadams/.local/bin:$PATH"
