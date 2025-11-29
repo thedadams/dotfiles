@@ -23,5 +23,5 @@ $env.config = ($env.config | upsert edit_mode vi | upsert cursor_shape { vi_inse
 def bubu [] {
     brew update
     brew outdated
-    brew upgrade
+    brew upgrade -y
 }
