@@ -7,10 +7,13 @@ if err then
   return
 end
 
+revisions.refresh({keep_selection = true, selected_revision = context.change_id()})
+
 if out == "" then
   flash({ text = "Fetched" })
   return
 end
+
 
 flash({ text = "Fetched: " .. out })
 '''
@@ -18,16 +21,20 @@ flash({ text = "Fetched: " .. out })
 [[actions]]
 name = "rebase_on_trunk"
 lua = '''
-local out, err = jj({"rebase", "-o", "trunk()"})
+local id = context.change_id()
+local out, err = jj({"rebase", "-o", "trunk()", "-r", id .. "::"})
 if err then
   flash({ text = err, error = true })
   return
 end
 
+revisions.refresh({keep_selection = true, selected_revision = id})
+
 if out == "" then
-  flash({ text = "Rebased on trunk" })
+  flash({ text = "Rebased on trunk " .. id })
   return
 end
+
 
 flash({ text = "Rebased: " .. out })
 '''
