@@ -28,6 +28,8 @@
 
 auto-update-channel = tip
 
+mouse-hide-while-typing = true
+
 command = /opt/homebrew/bin/zellij
 
 keybind = shift+enter=text:\x1b\r
