@@ -112,7 +112,6 @@ if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
 fi
 # End Nix
 
-alias claude="/Users/thedadams/.claude/local/claude"
 export PATH="$HOME/.local/bin:$PATH"
 
 # Added by codebase-memory-mcp install
