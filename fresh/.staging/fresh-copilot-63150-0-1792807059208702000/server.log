@@ -1,0 +1,4 @@
+[KeytarMasterKey] keytar-master-key: master-key resolution failed Error: getMasterKey: timeout after 5000ms
+    at Timeout._onTimeout (/opt/homebrew/lib/node_modules/@github/copilot-language-server/dist/main.js:1944:28121)
+    at listOnTimeout (node:internal/timers:685:17)
+    at process.processTimers (node:internal/timers:618:7)
