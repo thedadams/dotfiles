@@ -6,7 +6,7 @@ pwd=`pwd`
 config_dir=${XDG_CONFIG_HOME:-~/.config}
 
 for f in $(ls); do
-    if [[ $f == "nvim" || $f == "jj" || $f == "zed" ]]; then
+    if [[ $f == "nvim" || $f == "jj" || $f == "zed" || $f == "zellij" ]]; then
         rm -rf $config_dir/$f
         mkdir -p $config_dir/
         ln -s $pwd/$f $config_dir/$f

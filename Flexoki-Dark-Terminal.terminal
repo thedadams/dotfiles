@@ -1,6 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
-    "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
 	<key>ANSIBlackColor</key>
@@ -157,7 +156,7 @@
 	ABkAAAAAAAAAAAAAAAAAAADY
 	</data>
 	<key>CommandString</key>
-	<string>/opt/homebrew/bin/nu --config ~/.config.nu --env-config ~/.env.nu</string>
+	<string>/opt/homebrew/bin/zellij</string>
 	<key>CursorColor</key>
 	<data>
 	YnBsaXN0MDDUAQIDBAUGBwpYJHZlcnNpb25ZJGFyY2hpdmVyVCR0b3BYJG9iamVjdHMS
@@ -168,9 +167,9 @@
 	AAAZAAAAAAAAAAAAAAAAAAAA2Q==
 	</data>
 	<key>DynamicANSIForegroundColors</key>
-	<true />
+	<true/>
 	<key>EnableSmoothResizing</key>
-	<true />
+	<true/>
 	<key>Font</key>
 	<data>
 	YnBsaXN0MDDUAQIDBAUGBwpYJHZlcnNpb25ZJGFyY2hpdmVyVCR0b3BYJG9iamVjdHMS
@@ -181,11 +180,11 @@
 	AAAAHAAAAAAAAAAAAAAAAAAAANc=
 	</data>
 	<key>FontAntialias</key>
-	<true />
+	<true/>
 	<key>ProfileCurrentVersion</key>
 	<real>2.0899999999999999</real>
 	<key>RunCommandAsShell</key>
-	<true />
+	<true/>
 	<key>SelectionColor</key>
 	<data>
 	YnBsaXN0MDDUAQIDBAUGBwpYJHZlcnNpb25ZJGFyY2hpdmVyVCR0b3BYJG9iamVjdHMS
@@ -196,25 +195,25 @@
 	ABkAAAAAAAAAAAAAAAAAAADY
 	</data>
 	<key>ShowActiveProcessArgumentsInTabTitle</key>
-	<true />
+	<true/>
 	<key>ShowActiveProcessArgumentsInTitle</key>
-	<true />
+	<true/>
 	<key>ShowActiveProcessInTitle</key>
-	<true />
+	<true/>
 	<key>ShowComponentsWhenTabHasCustomTitle</key>
-	<true />
+	<true/>
 	<key>ShowDimensionsInTitle</key>
-	<false />
+	<false/>
 	<key>ShowRepresentedURLInTitle</key>
-	<true />
+	<true/>
 	<key>ShowRepresentedURLPathInTitle</key>
-	<false />
+	<false/>
 	<key>ShowShellCommandInTitle</key>
-	<false />
+	<false/>
 	<key>ShowTTYNameInTitle</key>
-	<false />
+	<false/>
 	<key>ShowWindowSettingsNameInTitle</key>
-	<false />
+	<false/>
 	<key>TextBoldColor</key>
 	<data>
 	YnBsaXN0MDDUAQIDBAUGBwpYJHZlcnNpb25ZJGFyY2hpdmVyVCR0b3BYJG9iamVjdHMS
@@ -234,7 +233,7 @@
 	AAAZAAAAAAAAAAAAAAAAAAAA2Q==
 	</data>
 	<key>UseBrightBold</key>
-	<false />
+	<false/>
 	<key>columnCount</key>
 	<integer>362</integer>
 	<key>name</key>
@@ -246,8 +245,8 @@
 	<key>type</key>
 	<string>Window Settings</string>
 	<key>useBrightBold</key>
-	<true />
+	<true/>
 	<key>useOptionAsMetaKey</key>
-	<true />
+	<true/>
 </dict>
 </plist>
