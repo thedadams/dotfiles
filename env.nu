@@ -38,4 +38,4 @@ path add "/sbin"
 path add "~/.rd/bin"
 path add ($env.GOPATH | path join "bin")
 
-$env.config.edit_mode = 'fresh'
+$env.config.edit_mode = 'vi'
