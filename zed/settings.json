@@ -1,4 +1,7 @@
 {
+  "node": {
+    "ignore_system_version": true,
+  },
   "code_lens": "on",
   "semantic_tokens": "off",
   "global_lsp_settings": {
@@ -69,6 +72,27 @@
     "Git Ignore": ["{git,.git}/ignore", ".git/info/exclude"],
   },
   "agent": {
+    "sidebar_side": "right",
+    "tool_permissions": {
+      "tools": {
+        "terminal": {
+          "always_allow": [
+            {
+              "pattern": "^gofmt\\b"
+            },
+            {
+              "pattern": "^go\\s+test(\\s|$)"
+            },
+            {
+              "pattern": "^go\\s+generate(\\s|$)"
+            },
+            {
+              "pattern": "^python3\\s+mcpwn\\.py(\\s|$)"
+            }
+          ]
+        }
+      }
+    },
     "dock": "right",
     "inline_assistant_model": {
       "provider": "copilot_chat",
@@ -94,7 +118,8 @@
     },
     "default_profile": "write",
     "default_model": {
-      "provider": "openai",
+      "enable_thinking": true,
+      "provider": "openai-subscribed",
       "model": "gpt-5.5",
     },
     "use_modifier_to_send": false,
