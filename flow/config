@@ -188,6 +188,9 @@ enable_format_on_save true
 # initial_find_query "selection"
 # value type: one of "empty", "selection", "last_query", "selection_or_last_query"
 
+# jump_label_alphabet "abcdefghijklmnopqrstuvwxyz"
+# value type: quoted string
+
 # ignore_filter_stderr false
 # value type: true or false
 
@@ -270,6 +273,9 @@ tab_width 4
 # dropdown_style "compact"
 # value type: one of "bars_top_bottom", "bars_left_right", "bar_left", "bar_right", "thick_boxed", "extra_thick_boxed", "dotted_boxed", "rounded_boxed", "double_boxed", "single_double_top_bottom_boxed", "single_double_left_right_boxed", "boxed", "bar_left_spacious", "bar_right_spacious", "spacious", "compact"
 
+# menu_style "bar_left_spacious"
+# value type: one of "bars_top_bottom", "bars_left_right", "bar_left", "bar_right", "thick_boxed", "extra_thick_boxed", "dotted_boxed", "rounded_boxed", "double_boxed", "single_double_top_bottom_boxed", "single_double_left_right_boxed", "boxed", "bar_left_spacious", "bar_right_spacious", "spacious", "compact"
+
 # panel_style "compact"
 # value type: one of "bars_top_bottom", "bars_left_right", "bar_left", "bar_right", "thick_boxed", "extra_thick_boxed", "dotted_boxed", "rounded_boxed", "double_boxed", "single_double_top_bottom_boxed", "single_double_left_right_boxed", "boxed", "bar_left_spacious", "bar_right_spacious", "spacious", "compact"
 
@@ -299,6 +305,9 @@ tab_width 4
 
 # palette_opacity 0.75
 # value type: fractional number
+
+# show_menu "left"
+# value type: one of "bar", "left", "right", "none"
 
 # centered_view false
 # value type: true or false
@@ -338,6 +347,9 @@ tab_width 4
 
 # desktop_theme_file ""
 # value type: quoted string
+
+# url_handler ["open","{{url}}"]
+# value type: list of quoted strings
 
 # non_indexed_projects ["{{env:HOME}}","/","/Applications","/Library","/System","/Users","/Volumes","/bin","/dev","/etc","/home","/private","/sbin","/tmp","/usr","/var"]
 # value type: list of quoted strings
