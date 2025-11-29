@@ -185,11 +185,26 @@ enable_format_on_save true
 # enable_prefix_keyhints true
 # value type: true or false
 
+# enable_minimode_keyhints true
+# value type: true or false
+
+# enable_overlay_keyhints true
+# value type: true or false
+
+# enable_panel_keyhints false
+# value type: true or false
+
 # enable_auto_find true
 # value type: true or false
 
 # find_mode "auto"
 # value type: one of "auto", "exact", "case_folded", "regex_auto", "regex", "regex_case_folded"
+
+# find_in_files_mode "auto"
+# value type: one of "auto", "exact", "case_folded", "regex_auto", "regex", "regex_case_folded"
+
+# find_in_files_filter "default"
+# value type: one of "default", "hidden", "no_ignore", "all"
 
 # initial_find_query "selection"
 # value type: one of "empty", "selection", "last_query", "selection_or_last_query"
@@ -224,6 +239,9 @@ tab_width 4
 
 # background_syntax_threshold 20000
 # value type: positive integer
+
+# syntax_injection_depth 6
+# value type: positive integer up to 255
 
 # top_bar "tabs"
 # value type: quoted string
@@ -315,8 +333,14 @@ tab_width 4
 # info_box_width_limit 80
 # value type: positive integer
 
+# info_code_overflow "wrap"
+# value type: one of "wrap", "clip"
+
 # palette_placement "top_center"
-# value type: one of "top_center", "top_left", "top_right", "center"
+# value type: one of "top_center", "top_left", "top_right", "bottom_right", "center"
+
+# vcs_status_placement "top_right"
+# value type: one of "top_center", "top_left", "top_right", "bottom_right", "center"
 
 # palette_opacity 0.75
 # value type: fractional number
@@ -359,6 +383,24 @@ tab_width 4
 
 # enable_file_watcher true
 # value type: true or false
+
+# enable_vcs_watcher true
+# value type: true or false
+
+# vcs_commit_command "git commit"
+# value type: quoted string
+
+# vcs_commit_all_command "git commit --all"
+# value type: quoted string
+
+# vcs_amend_command "git commit --amend"
+# value type: quoted string
+
+# vcs_fetch_command "git fetch"
+# value type: quoted string
+
+# vcs_push_command "git push"
+# value type: quoted string
 
 # desktop_theme_file ""
 # value type: quoted string
