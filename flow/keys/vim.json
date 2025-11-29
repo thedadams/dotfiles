@@ -12,7 +12,8 @@
     "selection": "normal",
     "press": [
       ["<D-s>", "save_file"],
-      ["<D-z>", "undo"]
+      ["<D-z>", "undo"],
+      ["r", ["select_right"], ["move_to_char", "insert_chars"]]
     ]
   },
   "visual": {

@@ -61,6 +61,9 @@ gutter_line_numbers_mode "absolute"
 # terminal_reflow_on_resize true
 # value type: true or false
 
+# terminal_input_delay_ms 3
+# value type: positive integer up to 65535
+
 # terminal_on_exit "hold_on_error"
 # value type: one of "hold_on_error", "close", "hold"
 
@@ -142,8 +145,11 @@ inline_vcs_blame_alignment "left"
 # input_idle_time_ms 100
 # value type: positive integer
 
-# idle_actions ["highlight_references"]
-# value type: list of idle actions (available actions: "hover", "highlight_references")
+# idle_actions ["highlight_references","code_actions"]
+# value type: list of idle actions (available actions: "hover", "highlight_references", "code_actions")
+
+# code_action_indicator_mode "quickfix_on_line"
+# value type: one of "any", "quickfix_on_line", "none"
 
 # idle_commands null
 # value type: list of quoted strings or null
@@ -213,6 +219,12 @@ tab_width 4
 # reflow_width 76
 # value type: positive integer
 
+# background_syntax "auto"
+# value type: one of "auto", "always", "never"
+
+# background_syntax_threshold 20000
+# value type: positive integer
+
 # top_bar "tabs"
 # value type: quoted string
 
@@ -273,7 +285,10 @@ tab_width 4
 # dropdown_style "compact"
 # value type: one of "bars_top_bottom", "bars_left_right", "bar_left", "bar_right", "thick_boxed", "extra_thick_boxed", "dotted_boxed", "rounded_boxed", "double_boxed", "single_double_top_bottom_boxed", "single_double_left_right_boxed", "boxed", "bar_left_spacious", "bar_right_spacious", "spacious", "compact"
 
-# menu_style "bar_left_spacious"
+# menu_style "compact"
+# value type: one of "bars_top_bottom", "bars_left_right", "bar_left", "bar_right", "thick_boxed", "extra_thick_boxed", "dotted_boxed", "rounded_boxed", "double_boxed", "single_double_top_bottom_boxed", "single_double_left_right_boxed", "boxed", "bar_left_spacious", "bar_right_spacious", "spacious", "compact"
+
+# dialog_style "thick_boxed"
 # value type: one of "bars_top_bottom", "bars_left_right", "bar_left", "bar_right", "thick_boxed", "extra_thick_boxed", "dotted_boxed", "rounded_boxed", "double_boxed", "single_double_top_bottom_boxed", "single_double_left_right_boxed", "boxed", "bar_left_spacious", "bar_right_spacious", "spacious", "compact"
 
 # panel_style "compact"
