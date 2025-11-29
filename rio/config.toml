@@ -73,3 +73,10 @@ args = ["--config", "~/.config.nu", "--env-config", "~/.env.nu"]
 
 [window]
 mode = "Maximized"
+
+[navigation]
+mode = "NativeTab"
+unfocused-split-opacity = 0.4
+
+[panel]
+column-gap = 15
