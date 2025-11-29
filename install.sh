@@ -10,7 +10,7 @@ for f in $(ls); do
         rm -rf $config_dir/zed/settings.json
         mkdir -p $config_dir/
         ln -s $pwd/$f $config_dir/zed/settings.json
-    elif [[ $f == "nvim" || $f == "helix" || $f == "jj" || $f == "ghostty" ]]; then
+    elif [[ $f == "nvim" || $f == "helix" || $f == "jj" || $f == "ghostty" || $f == "fresh" || $f == "rio" ]]; then
         rm -rf $config_dir/$f
         mkdir -p $config_dir/
         ln -s $pwd/$f $config_dir/$f
