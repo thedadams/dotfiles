@@ -1,0 +1,22 @@
+{
+    "settings": { "inherit": "<<builtin>>" },
+    "project": { "syntax": "vim", "on_match_failure": "ignore", "press": [] },
+    "normal": { "syntax": "vim", "on_match_failure": "ignore", "name": "NORMAL", "inherit": "project", "line_numbers": "relative", "cursor": "block", "selection": "normal", "press": [
+        ["<D-s>", "save_file"],
+        ["<D-z>", "undo"],
+        ["<D-Z>", "redo"]
+    ] },
+    "visual": { "syntax": "vim", "on_match_failure": "ignore", "name": "VISUAL", "inherit": "normal", "line_numbers": "relative", "cursor": "block", "selection": "normal", "init_command": ["enable_selection"], "press": [] },
+    "visual line": { "syntax": "vim", "on_match_failure": "ignore", "name": "VISUAL LINE", "inherit": "normal", "line_numbers": "relative", "cursor": "block", "selection": "normal", "press": [] },
+    "visual block": { "syntax": "vim", "on_match_failure": "ignore", "name": "VISUAL BLOCK", "inherit": "visual", "line_numbers": "relative", "cursor": "block", "selection": "normal", "init_command": ["enable_selection"], "press": [] },
+    "insert": { "syntax": "vim", "name": "INSERT", "line_numbers": "absolute", "cursor": "beam", "inherit_breakout": [["<C-o>","normal"]], "init_command": ["pause_undo_history"], "deinit_command": ["resume_undo_history"], "press": [
+        ["<D-s>", "save_file"],
+        ["<D-z>", "undo"],
+        ["<D-Z>", "redo"]
+    ] },
+    "overlay/palette": { "syntax": "vim", "press": [] },
+    "mini/file_browser": { "syntax": "vim", "press": [] },
+    "mini/find": { "syntax": "vim", "press": [] },
+    "mini/find_in_files": { "syntax": "vim", "press": [] },
+    "home": { "syntax": "vim", "on_match_failure": "ignore", "inherit": "project", "press": [] }
+}
