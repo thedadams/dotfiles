@@ -1,5 +1,42 @@
 {
   "theme": "ember-one-fresh.json",
+  "editor": {
+      "tab_size": 4
+  },
+  "languages": {
+      "go": {
+          "use_tabs": true,
+          "tab_size": 4,
+          "formatter": { "command": "goimports" },
+          "format_on_save": true
+      }
+  },
+  "keybindings": [
+    {
+      "keys": [
+        {
+          "key": "g"
+        },
+        {
+          "key": "d"
+        }
+      ],
+      "action": "lsp_goto_definition",
+      "when": "mode:vi-normal"
+    },
+    {
+      "key": "[",
+      "modifiers": ["ctrl"],
+      "action": "navigate_back",
+      "when": "normal"
+    },
+    {
+      "key": "[",
+      "modifiers": ["ctrl"],
+      "action": "navigate_back",
+      "when": "mode:vi-normal"
+    }
+  ],
   "plugins": {
     "vi_mode": {
       "settings": {
@@ -22,11 +59,28 @@
         "maxFileSizeKb": 1024,
         "debug": false
       }
+    },
+    "plugin": {
+      "enabled": true,
+      "settings": {
+        "enabled": true,
+        "debug": false,
+        "trackCursorMovement": false
+      }
     }
   },
   "version": 2,
   "lsp": {
     "markdown": {
+      "enabled": true,
+      "auto_start": true,
+      "process_limits": {
+        "max_memory_percent": 50,
+        "max_cpu_percent": 90,
+        "enabled": false
+      }
+    },
+    "go": {
       "enabled": true,
       "auto_start": true,
       "process_limits": {
