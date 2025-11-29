@@ -2,7 +2,7 @@
 
 [user]
 name = "Donnie Adams"
-email = "donnie@thedadams.com"
+email = "donnie@obot.ai"
 
 [signing]
 backend = "ssh"
@@ -18,3 +18,7 @@ format_signed_off_by_trailer(self)
 [git]
 push = "origin"
 fetch = ["origin", "upstream"]
+
+[ui]
+pager = ["hunk", "pager"]
+diff-formatter = ":git"

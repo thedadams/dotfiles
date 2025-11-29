@@ -1,0 +1,63 @@
+theme = "custom"
+
+[custom_theme]
+base = "ember"
+label = "Ember One"
+
+background = "#20242C"
+panel = "#282E37"
+panelAlt = "#303743"
+border = "#434D5B"
+
+accent = "#F58B45"
+accentMuted = "#3F4F66"
+
+text = "#E1E6EC"
+muted = "#AAB4C0"
+
+contextBg = "#20242C"
+contextContentBg = "#20242C"
+
+addedBg = "#26362F"
+addedContentBg = "#2B4134"
+addedSignColor = "#99C45C"
+
+removedBg = "#3A2830"
+removedContentBg = "#4A2B35"
+removedSignColor = "#EA5670"
+
+movedAddedBg = "#263A3A"
+movedRemovedBg = "#3A2F36"
+
+lineNumberBg = "#282E37"
+lineNumberFg = "#7F8998"
+
+selectedHunk = "#3F4F66"
+
+badgeAdded = "#99C45C"
+badgeRemoved = "#EA5670"
+badgeNeutral = "#AAB4C0"
+
+fileNew = "#99C45C"
+fileDeleted = "#EA5670"
+fileRenamed = "#DDBB52"
+fileModified = "#5FAAF7"
+fileUntracked = "#B96EF2"
+
+noteBorder = "#B96EF2"
+noteBackground = "#282E37"
+noteTitleBackground = "#303743"
+noteTitleText = "#F5F7FA"
+
+[custom_theme.syntax]
+default = "#E1E6EC"
+keyword = "#EA5670"
+string = "#99C45C"
+comment = "#7F8998"
+number = "#F58B45"
+function = "#5FAAF7"
+property = "#36CDBB"
+type = "#DDBB52"
+variable = "#E1E6EC"
+operator = "#B96EF2"
+punctuation = "#AAB4C0"
