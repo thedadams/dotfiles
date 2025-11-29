@@ -32,7 +32,7 @@ command = /opt/homebrew/bin/nu --config ~/.config.nu --env-config ~/.env.nu
 
 keybind = shift+enter=text:\x1b\r
 
-font-family = Berkeley Mono
+font-family = Lilex
 theme = ember-one
 
 unfocused-split-opacity = 0.4

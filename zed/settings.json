@@ -284,7 +284,7 @@
   },
   "ui_font_size": 14.0,
   "buffer_font_size": 13,
-  "ui_font_family": "Berkeley Mono",
-  "buffer_font_family": "Berkeley Mono",
+  "ui_font_family": "Lilex",
+  "buffer_font_family": "Lilex",
   "confirm_quit": true,
 }
