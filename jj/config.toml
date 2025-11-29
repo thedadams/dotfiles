@@ -14,3 +14,7 @@ commit_trailers = '''
 
 format_signed_off_by_trailer(self)
 '''
+
+[git]
+push = "origin"
+fetch = ["origin", "upstream"]
