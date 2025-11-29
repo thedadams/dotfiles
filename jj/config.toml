@@ -1,0 +1,19 @@
+"$schema" = "https://jj-vcs.github.io/jj/latest/config-schema.json"
+
+[user]
+name = "Donnie Adams"
+email = "donnie@thedadams.com"
+
+[signing]
+backend = "ssh"
+behavior = "own"
+key = "/Users/thedadams/.ssh/id_rsa"
+
+[templates]
+commit_trailers = '''
+
+format_signed_off_by_trailer(self)
+'''
+
+[ui]
+paginate = "never"
