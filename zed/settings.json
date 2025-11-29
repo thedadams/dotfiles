@@ -1,4 +1,5 @@
 {
+  "proxy": "",
   "show_wrap_guides": false,
   "node": {
     "ignore_system_version": true,
@@ -14,9 +15,6 @@
   },
   "agent_servers": {
     "opencode": {
-      "type": "registry",
-    },
-    "github-copilot-cli": {
       "type": "registry",
     },
     "codex-acp": {
@@ -90,35 +88,38 @@
         "terminal": {
           "always_allow": [
             {
-              "pattern": "^gofmt\\b",
+              "pattern": "^gofmt\\b"
             },
             {
-              "pattern": "^go\\s+test(\\s|$)",
+              "pattern": "^go\\s+test(\\s|$)"
             },
             {
-              "pattern": "^go\\s+generate(\\s|$)",
+              "pattern": "^go\\s+generate(\\s|$)"
             },
             {
-              "pattern": "^python3\\s+mcpwn\\.py(\\s|$)",
+              "pattern": "^python3\\s+mcpwn\\.py(\\s|$)"
             },
             {
-              "pattern": "^jj\\s+status(\\s|$)",
+              "pattern": "^jj\\s+status(\\s|$)"
             },
             {
-              "pattern": "^grep\\b",
+              "pattern": "^grep\\b"
             },
             {
-              "pattern": "^git\\s+--no-pager\\s+(status|diff|show)(\\s|$)",
+              "pattern": "^git\\s+--no-pager\\s+(status|diff|show)(\\s|$)"
             },
             {
-              "pattern": "^make\\s+test(\\s|$)",
+              "pattern": "^make\\s+test(\\s|$)"
             },
             {
-              "pattern": "^tail\\b",
+              "pattern": "^tail\\b"
             },
             {
-              "pattern": "^make\\s+lint-go(\\s|$)",
+              "pattern": "^make\\s+lint-go(\\s|$)"
             },
+            {
+              "pattern": "^make\\s+lint(\\s|$)"
+            }
           ],
         },
       },
@@ -204,15 +205,19 @@
       "syntax": {
         "constant.comment.todo": {
           "color": "#2E527Cff",
+          "font_style": "italic",
         },
         "string.comment.info": {
           "color": "#465D33ff",
+          "font_style": "italic",
         },
         "keyword.comment.warn": {
           "color": "#66552Dff",
+          "font_style": "italic",
         },
         "property.comment.error": {
           "color": "#63303Aff",
+          "font_style": "italic",
         },
       },
     },
