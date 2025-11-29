@@ -1,5 +1,4 @@
 theme = "ember-one"
-appearance = "system"
 diff_view = "side-by-side"
 comment_types = [
   { id = "note", label = "question", definition = "ask for clarification", color = "yellow" },
