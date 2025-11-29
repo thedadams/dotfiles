@@ -15,7 +15,7 @@ interface HighlightConfig {
 
 // Plugin configuration
 const config: HighlightConfig = {
-  enabled: false,  // Start disabled, use Enable or Toggle to activate
+  enabled: true,  // Start enabled
   keywords: [
     { word: "TODO", color: [255, 200, 50] },     // Yellow
     { word: "FIXME", color: [255, 100, 100] },   // Red
