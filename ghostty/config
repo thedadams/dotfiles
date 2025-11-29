@@ -25,22 +25,20 @@
 # ==========================
 # # The config file consists of simple key-value pairs,
 # # separated by equals signs.
-font-family = Berkeley Mono
-theme = Ayu
+
+auto-update-channel = tip
+
 command = /opt/homebrew/bin/nu --config ~/.config.nu --env-config ~/.env.nu
-adjust-cell-height = 4
 
 keybind = shift+enter=text:\x1b\r
 
-unfocused-split-opacity = 0.4
 font-family = Berkeley Mono
 theme = Ayu
-command = /opt/homebrew/bin/nu --config ~/.config.nu --env-config ~/.env.nu
-adjust-cell-height = 4
-auto-update-channel = tip
 
-# window-padding-x = 2
-#
+unfocused-split-opacity = 0.4
+adjust-cell-height = 4
+window-padding-x = 2
+
 # # Spacing around the equals sign does not matter.
 # # All of these are identical:
 # key=value
