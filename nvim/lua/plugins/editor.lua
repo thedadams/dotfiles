@@ -18,6 +18,19 @@ return {
     },
 
     {
+        "lewis6991/gitsigns.nvim",
+        opts = {
+            signs = {
+                add = { text = "+" },
+                change = { text = "~" },
+                delete = { text = "_" },
+                topdelete = { text = "^" },
+                changedelete = { text = "~" },
+            },
+        },
+    },
+
+    {
       "nvim-treesitter/nvim-treesitter",
       build = ":TSUpdate",
       config = function()
