@@ -35,6 +35,12 @@
       "modifiers": ["ctrl"],
       "action": "navigate_back",
       "when": "mode:vi-normal"
+    },
+    {
+      "key": "]",
+      "modifiers": ["ctrl"],
+      "action": "navigate_forward",
+      "when": "mode:vi-normal"
     }
   ],
   "plugins": {
@@ -59,14 +65,6 @@
         "maxFileSizeKb": 1024,
         "debug": false
       }
-    },
-    "plugin": {
-      "enabled": true,
-      "settings": {
-        "enabled": true,
-        "debug": false,
-        "trackCursorMovement": false
-      }
     }
   },
   "version": 2,
@@ -89,5 +87,8 @@
         "enabled": false
       }
     }
+  },
+  "terminal": {
+    "shell": { "command": "/opt/homebrew/bin/nu", "args": ["--config", "~/.config.nu", "--env-config", "~/.env.nu"] }
   }
 }
