@@ -39,6 +39,32 @@ end
 flash({ text = "Rebased: " .. out })
 '''
 
+[[actions]]
+name = "new_from_trunk"
+lua = '''
+local out, err = jj({"new", "trunk()"})
+if err then
+  flash({ text = err, error = true })
+  return
+end
+
+revisions.refresh({})
+
+if out == "" then
+  flash({ text = "New on trunk " })
+  return
+end
+
+
+flash({ text = "New on trunk: " .. out })
+'''
+
+[[bindings]]
+key = "N"
+action = "new_from_trunk"
+scope = "revisions"
+desc = "New on trunk"
+
 [[bindings]]
 key = "T"
 action = "rebase_on_trunk"
