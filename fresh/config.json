@@ -1,7 +1,10 @@
 {
   "theme": "ember-one-fresh.json",
   "editor": {
-      "tab_size": 4
+      "tab_size": 4,
+      "completion_popup_auto_show": true,
+      "quick_suggestions": true,
+      "quick_suggestions_delay_ms": 150
   },
   "languages": {
       "go": {
@@ -116,6 +119,12 @@
       "key": "b",
       "modifiers": ["ctrl"],
       "action": "toggle_file_explorer",
+      "when": "mode:vi-normal"
+    },
+    {
+      "key": "o",
+      "modifiers": ["super"],
+      "action": "open",
       "when": "mode:vi-normal"
     }
   ],
