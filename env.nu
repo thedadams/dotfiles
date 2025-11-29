@@ -39,4 +39,10 @@ path add "~/.rd/bin"
 path add "~/.local/bin"
 path add ($env.GOPATH | path join "bin")
 
+let rex_bin = '/Applications/Rex Beta.app/Contents/Helpers/Rex Server.rex/Contents/MacOS'
+
+if ($rex_bin | path exists) {
+    path add $rex_bin
+}
+
 $env.config.edit_mode = 'vi'
