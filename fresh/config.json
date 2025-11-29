@@ -23,6 +23,19 @@
   "keybindings": [
     {
       "keys": [
+        { 
+          "key": "g"
+        },
+        { 
+          "key": "c"
+        }
+      ],
+      "action": "toggle_comment",
+      "args": {},
+      "when": "mode:vi-normal"
+    },
+    {
+      "keys": [
         {
           "key": "g"
         },
