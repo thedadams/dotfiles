@@ -28,15 +28,16 @@ export { encodeProjectDir };
 
 // ── agent_sessions_codex ─────────────────────
 /**
-* Codex CLI and Codex Desktop scanners for the agent-sessions hub.
+* Codex CLI and ChatGPT (Codex) scanners for the agent-sessions hub.
 *
 * Store: `$CODEX_HOME/sessions/YYYY/MM/DD/rollout-<timestamp>-<uuid>.jsonl`,
 * with `CODEX_HOME` defaulting to `~/.codex`. The first record is an envelope:
 * `{"type":"session_meta","payload":{"id":…,"cwd":…}}`, so the cwd is under `payload`.
 *
-* Codex Desktop shares the same store and adds `state_5.sqlite` beside it.
-* Transcripts are reported once, by the CLI scanner; the desktop scanner
-* reports presence only, to avoid listing each conversation twice.
+* The ChatGPT desktop app's Codex shares the same store. Each transcript's
+* `session_meta` names the app that wrote it (`originator`), so the store is
+* read once and every conversation is listed once, under the app it came
+* from. Both resume with the `codex` CLI.
 */
 import { type Evidence } from "./lib/agent_scanner.ts";
 /** `$CODEX_HOME`, or `~/.codex`. */
@@ -184,6 +185,12 @@ export interface SearchOpts {
 	*  `-F`, git-grep/grep `-F`). Custom providers should honour this so
 	*  the query is interpreted consistently with the toolbar toggle. */
 	regex?: boolean;
+	/** When true, match upper and lower case exactly; when false (the
+	*  default) fold case. Providers must decide this *explicitly* — a
+	*  smart-case flag left on would quietly re-derive it from the query
+	*  and disagree with the Case toggle on the toolbar. Built-ins pass
+	*  rg `--case-sensitive`/`--ignore-case`, git-grep/grep/ack `-i`. */
+	caseSensitive?: boolean;
 }
 /** A registered Live Grep backend. */
 export interface LiveGrepProvider {
