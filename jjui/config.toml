@@ -1,0 +1,45 @@
+[[actions]]
+name = "plain_fetch"
+lua = '''
+local out, err = jj({"git", "fetch"})
+if err then
+  flash({ text = err, error = true })
+  return
+end
+
+if out == "" then
+  flash({ text = "Fetched" })
+  return
+end
+
+flash({ text = "Fetched: " .. out })
+'''
+
+[[actions]]
+name = "rebase_on_trunk"
+lua = '''
+local out, err = jj({"rebase", "-o", "trunk()"})
+if err then
+  flash({ text = err, error = true })
+  return
+end
+
+if out == "" then
+  flash({ text = "Rebased on trunk" })
+  return
+end
+
+flash({ text = "Rebased: " .. out })
+'''
+
+[[bindings]]
+key = "T"
+action = "rebase_on_trunk"
+scope = "revisions"
+desc = "Rebase on trunk"
+
+[[bindings]]
+action = "plain_fetch"
+key = "ctrl+f"
+scope = "revisions"
+desc = "Just fetch"
