@@ -52,7 +52,7 @@ COMPLETION_WAITING_DOTS="true"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-EDITOR="hx"
+EDITOR="nvim"
 KUBE_EDITOR="$EDITOR"
 OTTO8_EDITOR="$EDITOR"
 GOPATH="$HOME/go"
@@ -201,7 +201,4 @@ fi
 # End Nix
 
 alias claude="/Users/thedadams/.claude/local/claude"
-source /opt/homebrew/opt/chruby/share/chruby/chruby.sh
-source /opt/homebrew/opt/chruby/share/chruby/auto.sh
-chruby ruby-3.4.1
 export PATH="$HOME/.local/bin:$PATH"
