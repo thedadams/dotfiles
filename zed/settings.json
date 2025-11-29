@@ -58,7 +58,6 @@
   ],
   "buffer_font_weight": 400.0,
   "colorize_brackets": true,
-  "base_keymap": "JetBrains",
   "title_bar": {
     "show_branch_icon": true,
   },

@@ -1,5 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+    "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
 	<key>ANSIBlackColor</key>
@@ -166,8 +167,10 @@
 	cqIWGFhOU09iamVjdAgRGiQpMjdJTFFTV11kand+qKqssbzFzdAAAAAAAAABAQAAAAAA
 	AAAZAAAAAAAAAAAAAAAAAAAA2Q==
 	</data>
+	<key>DynamicANSIForegroundColors</key>
+	<true />
 	<key>EnableSmoothResizing</key>
-	<true/>
+	<true />
 	<key>Font</key>
 	<data>
 	YnBsaXN0MDDUAQIDBAUGBwpYJHZlcnNpb25ZJGFyY2hpdmVyVCR0b3BYJG9iamVjdHMS
@@ -178,11 +181,11 @@
 	AAAAHAAAAAAAAAAAAAAAAAAAANc=
 	</data>
 	<key>FontAntialias</key>
-	<true/>
+	<true />
 	<key>ProfileCurrentVersion</key>
 	<real>2.0899999999999999</real>
 	<key>RunCommandAsShell</key>
-	<true/>
+	<true />
 	<key>SelectionColor</key>
 	<data>
 	YnBsaXN0MDDUAQIDBAUGBwpYJHZlcnNpb25ZJGFyY2hpdmVyVCR0b3BYJG9iamVjdHMS
@@ -192,22 +195,26 @@
 	ohYYWE5TT2JqZWN0CBEaJCkyN0lMUVNXXWRqd36nqauwu8TMzwAAAAAAAAEBAAAAAAAA
 	ABkAAAAAAAAAAAAAAAAAAADY
 	</data>
+	<key>ShowActiveProcessArgumentsInTabTitle</key>
+	<true />
 	<key>ShowActiveProcessArgumentsInTitle</key>
-	<true/>
+	<true />
 	<key>ShowActiveProcessInTitle</key>
-	<true/>
+	<true />
+	<key>ShowComponentsWhenTabHasCustomTitle</key>
+	<true />
 	<key>ShowDimensionsInTitle</key>
-	<false/>
+	<false />
 	<key>ShowRepresentedURLInTitle</key>
-	<true/>
+	<true />
 	<key>ShowRepresentedURLPathInTitle</key>
-	<false/>
+	<false />
 	<key>ShowShellCommandInTitle</key>
-	<false/>
+	<false />
 	<key>ShowTTYNameInTitle</key>
-	<false/>
+	<false />
 	<key>ShowWindowSettingsNameInTitle</key>
-	<false/>
+	<false />
 	<key>TextBoldColor</key>
 	<data>
 	YnBsaXN0MDDUAQIDBAUGBwpYJHZlcnNpb25ZJGFyY2hpdmVyVCR0b3BYJG9iamVjdHMS
@@ -226,6 +233,8 @@
 	cqIWGFhOU09iamVjdAgRGiQpMjdJTFFTV11kand+qKqssbzFzdAAAAAAAAABAQAAAAAA
 	AAAZAAAAAAAAAAAAAAAAAAAA2Q==
 	</data>
+	<key>UseBrightBold</key>
+	<false />
 	<key>columnCount</key>
 	<integer>362</integer>
 	<key>name</key>
@@ -237,6 +246,8 @@
 	<key>type</key>
 	<string>Window Settings</string>
 	<key>useBrightBold</key>
-	<true/>
+	<true />
+	<key>useOptionAsMetaKey</key>
+	<true />
 </dict>
 </plist>
