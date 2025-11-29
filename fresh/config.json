@@ -4,7 +4,8 @@
       "tab_size": 4,
       "completion_popup_auto_show": true,
       "quick_suggestions": true,
-      "quick_suggestions_delay_ms": 150
+      "quick_suggestions_delay_ms": 150,
+      "rainbow_brackets": false
   },
   "languages": {
       "go": {
