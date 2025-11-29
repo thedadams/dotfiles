@@ -33,6 +33,11 @@ adjust-cell-height = 4
 keybind = shift+enter=text:\x1b\r
 
 unfocused-split-opacity = 0.4
+font-family = Berkeley Mono
+theme = Ayu
+command = /opt/homebrew/bin/nu --config ~/.config.nu --env-config ~/.env.nu
+adjust-cell-height = 4
+auto-update-channel = tip
 
 # window-padding-x = 2
 #
@@ -55,5 +60,3 @@ unfocused-split-opacity = 0.4
 # # which is explained in the docs for that config option.
 # # Just for example:
 # resize-overlay-duration = 4s 200ms
-
-auto-update-channel = tip

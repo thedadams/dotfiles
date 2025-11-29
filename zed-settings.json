@@ -1,11 +1,11 @@
 {
   "agent_servers": {
     "opencode": {
-      "type": "registry"
+      "type": "registry",
     },
     "github-copilot": {
-      "type": "registry"
-    }
+      "type": "registry",
+    },
   },
   "edit_predictions": {
     "copilot": {
@@ -19,6 +19,24 @@
   "git_panel": {
     "tree_view": true,
   },
+  "ssh_connections": [
+    {
+      "host": "192.168.1.41",
+      "username": "thedadams",
+      "args": [],
+      "projects": [
+        {
+          "paths": ["/home/thedadams"],
+        },
+        {
+          "paths": ["/home/thedadams/.clawdbot"],
+        },
+        {
+          "paths": ["/home/thedadams/clawd"],
+        },
+      ],
+    },
+  ],
   "buffer_font_weight": 400.0,
   "colorize_brackets": true,
   "base_keymap": "JetBrains",
