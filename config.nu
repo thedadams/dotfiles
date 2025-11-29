@@ -25,3 +25,82 @@ def bubu [] {
     brew outdated
     brew upgrade -y
 }
+
+def --env unsource-env [file: path] {
+  let text = (open --raw $file)
+
+  # Find direct assignments:
+  # $env.FOO = ...
+  # $env.'FOO' = ...
+  # $env."FOO" = ...
+  let direct = (
+      [
+          ($text
+              | parse --regex r#'(?m)(?:^|[;|{])\s*\$env\.(?<name>[A-Za-z_][A-Za-z0-9_]*)\s*(?:\+{1,2}=|=(?:\s|[^=]))'#
+              | get name)
+          ($text
+              | parse --regex r#'(?m)(?:^|[;|{])\s*\$env\.'(?<name>[^']+)'\s*(?:\+{1,2}=|=(?:\s|[^=]))'#
+              | get name)
+          ($text
+              | parse --regex r#'(?m)(?:^|[;|{])\s*\$env\."(?<name>[^"]+)"\s*(?:\+{1,2}=|=(?:\s|[^=]))'#
+              | get name)
+      ]
+      | flatten
+  )
+
+  # Find keys in simple load-env { ... } records.
+  let loaded = (
+      $text
+      | lines
+      | reduce --fold { inside: false, depth: 0, names: [] } {|line, state|
+          let starts = (
+              (not $state.inside)
+              and ($line =~ r#'(?:^|[;|{])\s*load-env\s*\{'#)
+          )
+
+          let active = ($state.inside or $starts)
+
+          let keys = if $active {
+              [
+                  ($line
+                      | parse --regex r#'(?:^|[{,])\s*(?<name>[A-Za-z_][A-Za-z0-9_-]*)\s*:'#
+                      | get name)
+                  ($line
+                      | parse --regex r#'(?:^|[{,])\s*'(?<name>[^']+)'\s*:'#
+                      | get name)
+                  ($line
+                      | parse --regex r#'(?:^|[{,])\s*"(?<name>[^"]+)"\s*:'#
+                      | get name)
+              ]
+              | flatten
+          } else {
+              []
+          }
+
+          let opens = ($line | split chars | where {|c| $c == '{'} | length)
+          let closes = ($line | split chars | where {|c| $c == '}'} | length)
+
+          let depth = if $starts {
+              $opens - $closes
+          } else {
+              $state.depth + $opens - $closes
+          }
+
+          {
+              inside: ($depth > 0)
+              depth: $depth
+              names: ($state.names ++ $keys)
+          }
+      }
+      | get names
+  )
+
+  let names = (($direct ++ $loaded) | uniq --ignore-case)
+
+  if ($names | is-empty) {
+      print "No recognizable environment assignments found."
+  } else {
+      print $"Hiding: ($names | str join ', ')"
+      hide-env --ignore-errors ...$names
+  }
+  }
