@@ -1,0 +1,16 @@
+layout {
+    pane split_direction="vertical" {
+        pane {
+            name "k9s"
+            command "/opt/homebrew/bin/k9s"
+        }
+        pane {
+            name "port-forward"
+            command "/usr/local/bin/kubectl"
+            args "port-forward" "svc/obot" "8081:80"
+        }
+    }
+    pane size=1 borderless=true {
+        plugin location="zellij:compact-bar"
+    }
+}
