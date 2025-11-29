@@ -148,6 +148,11 @@
     }
   ],
   "plugins": {
+    "orchestrator": {
+      "settings": {
+        "autoOpenDock": false
+      }
+    },
     "vi_mode": {
       "settings": {
         "autoStart": true,
