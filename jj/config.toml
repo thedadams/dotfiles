@@ -19,6 +19,3 @@ format_signed_off_by_trailer(self)
 push = "origin"
 fetch = ["origin", "upstream"]
 
-[ui]
-pager = ["hunk", "pager"]
-diff-formatter = ":git"
