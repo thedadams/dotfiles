@@ -1,4 +1,5 @@
 {
+  "show_wrap_guides": false,
   "node": {
     "ignore_system_version": true,
   },
@@ -35,6 +36,7 @@
     "enabled": true,
   },
   "git_panel": {
+    "file_icons": true,
     "dock": "left",
     "tree_view": true,
   },
@@ -233,9 +235,13 @@
   },
   "vim_mode": true,
   "vim": {
+    "use_regex_search": false,
+    "show_edit_predictions_in_normal_mode": true,
     "use_system_clipboard": "never",
   },
   "project_panel": {
+    "diagnostic_badges": true,
+    "git_status_indicator": true,
     "dock": "left",
     "hide_root": false,
     "indent_size": 13.0,
