@@ -5,9 +5,9 @@ layout {
     pane split_direction="vertical" {
         pane split_direction="horizontal" {
             pane {
-                name "opencode"
+                name "codex"
                 command "/opt/homebrew/bin/nu"
-                args "--config" "/Users/thedadams/.config.nu" "--env-config" "/Users/thedadams/.env.nu" "-c" "opencode"
+                args "--config" "/Users/thedadams/.config.nu" "--env-config" "/Users/thedadams/.env.nu" "-c" "codex"
                 start_suspended true
             }
             pane {
