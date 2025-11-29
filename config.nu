@@ -17,6 +17,7 @@
 # options using:
 #     config nu --doc | nu-highlight | less -R
 
+alias claude-chat = claude --settings ~/.claude/profiles/chat-only.json --strict-mcp-config --mcp-config '{"mcpServers": {}}'
 
 $env.config = ($env.config | upsert edit_mode vi | upsert cursor_shape { vi_insert: line, vi_normal: block, emacs: block })
 
