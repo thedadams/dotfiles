@@ -23,15 +23,14 @@
   "keybindings": [
     {
       "keys": [
-        { 
+        {
           "key": "g"
         },
-        { 
+        {
           "key": "c"
         }
       ],
       "action": "toggle_comment",
-      "args": {},
       "when": "mode:vi-normal"
     },
     {
@@ -139,6 +138,12 @@
       "modifiers": ["super"],
       "action": "open",
       "when": "mode:vi-normal"
+    },
+    {
+      "key": "o",
+      "modifiers": ["super"],
+      "action": "open",
+      "when": "fileExplorer"
     }
   ],
   "plugins": {
