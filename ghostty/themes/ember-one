@@ -1,0 +1,31 @@
+# Ember One for Ghostty
+# Dark charcoal, warm vivid low-pastel, One Dark-adjacent.
+
+background = #20242C
+foreground = #E1E6EC
+
+cursor-color = #F58B45
+cursor-text = #20242C
+
+selection-background = #3F4F66
+selection-foreground = #F5F7FA
+
+# ANSI 0-7
+palette = 0=#1F222A
+palette = 1=#E85D75
+palette = 2=#A7C76F
+palette = 3=#E7C664
+palette = 4=#69B4FF
+palette = 5=#D18CFF
+palette = 6=#56D6C2
+palette = 7=#D7DCE2
+
+# Bright ANSI 8-15
+palette = 8=#6F7785
+palette = 9=#FF7A90
+palette = 10=#C6E48B
+palette = 11=#FFE08A
+palette = 12=#8CC8FF
+palette = 13=#E7B0FF
+palette = 14=#7CE6D2
+palette = 15=#F2F5F8
