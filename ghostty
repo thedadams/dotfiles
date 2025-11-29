@@ -27,7 +27,7 @@
 # # separated by equals signs.
 font-family = VictorMono Nerd Font
 theme = Flexoki Dark
-command = /opt/homebrew/bin/zellij
+command = /opt/homebrew/bin/nu --config ~/.config.nu --env-config ~/.env.nu
 # window-padding-x = 2
 #
 # # Spacing around the equals sign does not matter.

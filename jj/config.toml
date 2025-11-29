@@ -2,7 +2,7 @@
 
 [user]
 name = "Donnie Adams"
-email = "donnie@thedadams.com"
+email = "donnie@obot.ai"
 
 [signing]
 backend = "ssh"
@@ -14,6 +14,3 @@ commit_trailers = '''
 
 format_signed_off_by_trailer(self)
 '''
-
-[ui]
-paginate = "never"
