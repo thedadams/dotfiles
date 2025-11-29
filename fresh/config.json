@@ -7,10 +7,16 @@
       "go": {
           "use_tabs": true,
           "tab_size": 4,
-          "formatter": { "command": "goimports" },
+          "formatter": {
+              "command": "goimports",
+              "args": [],
+              "stdin": true,
+              "timeout_ms": 10000
+          },
           "format_on_save": true
       }
   },
+  "active_keybinding_map": "macos-gui",
   "keybindings": [
     {
       "keys": [
@@ -41,6 +47,30 @@
       "modifiers": ["ctrl"],
       "action": "navigate_forward",
       "when": "mode:vi-normal"
+    },
+    {
+      "key": "c",
+      "modifiers": ["super"],
+      "action": "copy",
+      "when": "mode:vi-normal"
+    },
+    {
+      "key": "z",
+      "modifiers": ["super"],
+      "action": "undo",
+      "when": "mode:vi-normal"
+    },
+    {
+      "key": "z",
+      "modifiers": ["shift", "super"],
+      "action": "redo",
+      "when": "mode:vi-normal"
+    },
+    {
+      "key": "w",
+      "modifiers": ["alt"],
+      "action": "close_tab",
+      "when": "mode:vi-normal"
     }
   ],
   "plugins": {
@@ -64,6 +94,14 @@
         "debounceMs": 650,
         "maxFileSizeKb": 1024,
         "debug": false
+      }
+    },
+    "plugin": {
+      "enabled": true,
+      "settings": {
+        "enabled": true,
+        "debug": false,
+        "trackCursorMovement": false
       }
     }
   },
