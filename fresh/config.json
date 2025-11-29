@@ -111,6 +111,12 @@
       "modifiers": ["super"],
       "action": "toggle_file_explorer",
       "when": "mode:vi-normal"
+    },
+    {
+      "key": "b",
+      "modifiers": ["ctrl"],
+      "action": "toggle_file_explorer",
+      "when": "mode:vi-normal"
     }
   ],
   "plugins": {
@@ -143,6 +149,30 @@
         "debug": false,
         "trackCursorMovement": false
       }
+    },
+    "fresh-inline-blame": {
+      "enabled": true,
+      "settings": {
+        "enabled": true,
+        "debounceMs": 100,
+        "debug": false
+      }
+    },
+    "fresh-copilot": {
+      "enabled": true,
+      "settings": {
+        "enabled": true,
+        "automatic": true,
+        "nextEditSuggestions": true,
+        "debounceMs": 350,
+        "maxFileSizeKb": 512,
+        "disabledLanguages": ["diff", "git-commit", "gitcommit", "log", "plaintext", "text"],
+        "nodeCommand": "node",
+        "serverCommand": "copilot-language-server",
+        "serverArgs": ["--stdio"],
+        "quotaCooldownMinutes": 1440,
+        "debug": false
+      }
     }
   },
   "version": 2,
@@ -157,6 +187,15 @@
       }
     },
     "go": {
+      "enabled": true,
+      "auto_start": true,
+      "process_limits": {
+        "max_memory_percent": 50,
+        "max_cpu_percent": 90,
+        "enabled": false
+      }
+    },
+    "typescript": {
       "enabled": true,
       "auto_start": true,
       "process_limits": {

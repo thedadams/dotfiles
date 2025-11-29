@@ -1770,10 +1770,14 @@ type WidgetSpec = {
 	selectedIndex: number;
 	/**
 	* Number of rows of the panel's available height the list
-	* should occupy. Plugin computes from its viewport. The
-	* host shows up to this many items per render.
+	* should occupy. `None` (omitted) = auto: the host sizes the
+	* window from the panel height it already knows, so the
+	* plugin never re-derives layout arithmetic. An explicit
+	* value pins the window to that many rows, exactly as
+	* before. (Legacy fallback when the host has no height for
+	* the surface: 20 rows.)
 	*/
-	visibleRows: number;
+	visibleRows?: number | null;
 	/**
 	* Whether `Tab` / `Shift+Tab` will land focus on this
 	* list. Defaults to `true` (lists are normal tabbable
@@ -1790,7 +1794,13 @@ type WidgetSpec = {
 	nodes: Array<TreeNode>;
 	itemKeys: Array<string>;
 	selectedIndex: number;
-	visibleRows: number;
+	/**
+	* Rows of the panel's available height the tree occupies.
+	* `None` (omitted) = auto from the host-known panel height;
+	* an explicit value pins the window as before. (Legacy
+	* fallback when the host has no height: 20 rows.)
+	*/
+	visibleRows?: number | null;
 	/**
 	* Initial-only set of expanded item keys. Once the widget
 	* has rendered, the host's instance-state `expanded_keys`
@@ -1831,6 +1841,14 @@ type WidgetSpec = {
 	* selection stay node-based; rows per node just vary.
 	*/
 	cardBorders: boolean;
+	/**
+	* Columns of indent per depth level. `2` (the default) is the
+	* classic tree step. A panel only a couple of dozen columns wide
+	* that nests several levels deep can drop to `1` and spend those
+	* columns on node text instead — each level is still marked by
+	* the disclosure glyph (or the blank standing in for one).
+	*/
+	indentCols: number;
 	key?: string | null;
 } | {
 	"kind": "text";
@@ -2017,6 +2035,28 @@ type WidgetSpec = {
 	"kind": "overlay";
 	child: WidgetSpec;
 	key?: string | null;
+} | {
+	"kind": "component";
+	child: WidgetSpec;
+	key?: string | null;
+} | {
+	"kind": "popup";
+	child: WidgetSpec;
+	key?: string | null;
+	/**
+	* Anchor `[row, col]` in the panel's inner coordinates the
+	* popup drops from (the host resolves the final screen rect
+	* — opening below the anchor, flipping above near the frame
+	* edge, clamped on screen). `None` anchors at the popup's
+	* own position in the tree.
+	*/
+	anchor?: [number, number] | null;
+	/**
+	* When true, the popup escapes the panel's clipping and is
+	* painted at screen level (what the dropdown pop-over does);
+	* false keeps it panel-clipped like `Overlay`.
+	*/
+	screenSpace: boolean;
 };
 type WidgetAction = {
 	"kind": "focusAdvance";
@@ -3561,6 +3601,22 @@ interface EditorAPI {
 	*/
 	flushLayout(): boolean;
 	/**
+	* Put a composite buffer's cursor on the row showing `line`
+	* (0-indexed) of pane `pane` — 0 is the left/OLD pane — and scroll
+	* it into view.
+	* 
+	* `initialFocusHunk` on `createCompositeBuffer` lands the view on a
+	* hunk; this lands it on a *line*, which is what a plugin holding a
+	* concrete file position wants (following a review comment, or
+	* keeping the reader's place when a diff view flips between its
+	* unified and side-by-side layouts). No-op if that pane has no such
+	* line.
+	* 
+	* Queued, like every layout mutation: the returned bool only reports
+	* that the command was sent.
+	*/
+	setCompositeCursorLine(bufferId: number, pane: number, line: number): boolean;
+	/**
 	* Navigate to the next hunk in a composite buffer
 	*/
 	compositeNextHunk(bufferId: number): boolean;
@@ -3594,6 +3650,26 @@ interface EditorAPI {
 	* ```
 	*/
 	addOverlay(bufferId: number, namespace: string, start: number, end: number, options: Record<string, unknown>): boolean;
+	/**
+	* Declare a one-line overlay that follows this buffer's cursor.
+	* 
+	* Takes the same options as `addOverlay` and paints the same way — the
+	* difference is who places it. The host re-derives the range from the
+	* cursor while drawing each frame, so the bar marks the row the caret
+	* is on in that very frame. Painting it by hand from `cursor_moved`
+	* cannot: the hook fires after the move that already drew, so the bar
+	* lands a frame late and visibly trails a held arrow key.
+	* 
+	* Pass `null` to withdraw it.
+	* 
+	* ```typescript
+	* editor.setCursorLineOverlay(bufferId, {
+	* bg: "editor.selection_bg",
+	* extendToLineEnd: true,
+	* });
+	* ```
+	*/
+	setCursorLineOverlay(bufferId: number, options: unknown): boolean;
 	/**
 	* Clear all overlays in a namespace
 	*/
@@ -3685,8 +3761,15 @@ interface EditorAPI {
 	* 
 	* `activation` optionally makes the break cursor-dependent — same
 	* semantics as `addConceal`'s activation parameters.
+	* 
+	* `prefix` optionally draws a glyph run at the head of the continuation
+	* row, shaped `{ text, fg?, bg?, bold?, italic? }` with the same colour
+	* spec `addOverlay` takes (a theme key string or an `[r, g, b]` array).
+	* It is drawn *inside* the `indent` columns rather than in addition to
+	* them, so a wrapped block quote can keep its `▌` down every row without
+	* shifting the text. `indent` grows to fit a prefix wider than it.
 	*/
-	addSoftBreak(bufferId: number, namespace: string, position: number, indent: number, activation?: string, scopeStart?: number, scopeEnd?: number): boolean;
+	addSoftBreak(bufferId: number, namespace: string, position: number, indent: number, activation?: string | null, scopeStart?: number | null, scopeEnd?: number | null, prefix?: Record<string, unknown> | null): boolean;
 	/**
 	* Clear all soft breaks in a namespace
 	*/
@@ -3750,6 +3833,13 @@ interface EditorAPI {
 	* plugin can rebuild one line's virtual lines without nuking the namespace.
 	*/
 	clearVirtualLinesInRange(bufferId: number, namespace: string, start: number, end: number): boolean;
+	/**
+	* Clear *inline* virtual texts whose id starts with `idPrefix` and whose
+	* anchor byte falls in `[start, end)`. The inline analogue of
+	* `clearVirtualLinesInRange`, so a per-line pass can rebuild one line's
+	* inline decorations without dropping the rest of the set.
+	*/
+	clearVirtualTextsInRange(bufferId: number, idPrefix: string, start: number, end: number): boolean;
 	/**
 	* Add a virtual line (full line above/below a position)
 	* 
@@ -4146,9 +4236,45 @@ interface EditorAPI {
 	*/
 	clearScrollbarMarkers(bufferId: number, namespace: string): boolean;
 	/**
-	* Enable or disable line numbers for a buffer
+	* Show or hide line numbers for a buffer **on the user's behalf**.
+	* 
+	* This records the same explicit per-buffer pin as "Toggle Line Numbers
+	* (Current Buffer)": it beats any mode default, and is persisted with the
+	* rest of the per-file workspace state. Use it for a setting the user
+	* asked for — vi's `:set number` / `:set nonumber` are exactly that, a
+	* typed command that happens to arrive through a plugin.
+	* 
+	* A mode stating its own preference for the buffers it has taken over
+	* wants `setLineNumbersDefault` instead: re-asserting the pin from a
+	* `buffer_activated` handler overwrites whatever the user chose
+	* (issue #2931).
 	*/
 	setLineNumbers(bufferId: number, enabled: boolean): boolean;
+	/**
+	* Set this plugin's line-number *default* for a buffer, the way
+	* `setFoldIndicators` does for the gutter's fold arrows.
+	* 
+	* Pass `null` to withdraw the plugin's opinion and fall back to the
+	* user's own setting. The plugin's value is stored separately from that
+	* setting and is never persisted, so it can neither overwrite a
+	* deliberate choice — "Toggle Line Numbers (Current Buffer)" and
+	* `setLineNumbers` still win while this is set — nor leak into the saved
+	* session. A mode that hides the gutter should still clear its value on
+	* the way out.
+	*/
+	setLineNumbersDefault(bufferId: number, enabled: boolean | null): boolean;
+	/**
+	* Show or hide the gutter's fold indicators (`▾` / `▸`) for a buffer in
+	* the active split, the way `setLineNumbers` does for line numbers.
+	* 
+	* Pass `null` to withdraw the plugin's opinion and fall back to the
+	* user's own setting. The plugin's value is stored separately from that
+	* setting and is never persisted, so it can neither overwrite a
+	* deliberate choice — "Toggle Folding Indicators (Current Buffer)" still
+	* wins while this is set — nor leak into the saved session. A mode that
+	* hides them should still clear its value on the way out.
+	*/
+	setFoldIndicators(bufferId: number, enabled: boolean | null): boolean;
 	/**
 	* Enable or disable indentation guides for a buffer, overriding the global
 	* `editor.indentation_guide` setting. Tool views that render non-editable
@@ -4318,6 +4444,38 @@ interface EditorAPI {
 	* Close a buffer group
 	*/
 	closeBufferGroup(groupId: number): boolean;
+	/**
+	* Switch a virtual buffer's mode — the keybinding set that applies
+	* while it is focused.
+	* 
+	* A panel that grows a text field (an in-panel filter) needs the
+	* single-key commands of its normal mode to stop firing while the
+	* user types; giving the panel a text-input mode for the duration
+	* does that without the plugin re-registering bindings. Modes are
+	* declared with `defineMode`; a mode name with no definition falls
+	* back to the global bindings.
+	*/
+	setBufferMode(bufferId: number, mode: string): boolean;
+	/**
+	* Show or hide one panel of a buffer group, without tearing the
+	* group down.
+	* 
+	* The panel's buffer, its content and its scroll position all
+	* survive being hidden — only the group's split tree changes, so
+	* the remaining panels take over the freed space and a re-shown
+	* panel comes back where it was. Use it for optional sidebars a
+	* mode wants to toggle (a file list, a comments rail) instead of
+	* closing and recreating the group.
+	* 
+	* Hiding a panel that holds focus moves focus to a panel that is
+	* still rendered; focusing a hidden panel is a no-op. Returns
+	* `false` if the group or panel is unknown, or if the call would
+	* hide the group's last visible panel.
+	* 
+	* Queued, like every layout mutation: the returned bool only reports
+	* that the command was sent.
+	*/
+	setBufferGroupPanelVisible(groupId: number, panelName: string, visible: boolean): boolean;
 	/**
 	* Focus a specific panel within a buffer group
 	*/
@@ -5053,10 +5211,54 @@ interface HookEventMap {
 			byte_start: number;
 			byte_end: number;
 			content: string;
+			/** This line's role in an embedded-language region — a Markdown fenced
+			* code block, a Vue `<script>`/`<style>` block — as the highlighting
+			* engine classifies it while parsing. `"open"` and `"close"` are the
+			* delimiter lines; `"body"` is content strictly inside.
+			*
+			* Absent for ordinary lines AND when the region state could not be
+			* resolved (a >1MiB buffer whose viewport has no parse checkpoint before
+			* it yet). Treat absence as *unknown*, never as "outside a region": the
+			* point of this field is that a bare ``` opens or closes depending on
+			* every fence above it, so there is nothing to fall back on. */
+			region?: "open" | "body" | "close";
+			/** Where this line sits in a table the buffer's grammar recognizes.
+			* `role` is the line's kind (`"header"` is the column-name row,
+			* `"delimiter"` the `|---|---|` row, `"row"` a data row); `first_row`
+			* marks the data row directly below the delimiter; `last` marks the
+			* table's final line.
+			*
+			* Companion to `region`, and recoverable where that is not: "is this a
+			* table row" *is* derivable from a line's own text, so a consumer may
+			* fall back to its own rule when this is absent. What it cannot derive
+			* is where the table starts and ends — that needs the neighbouring
+			* lines, and an edit-sized batch does not contain them.
+			*
+			* `last` is false rather than unknown when the engine could not see the
+			* line below the table, so a consumer drawing a closing edge from it
+			* draws none instead of one in the wrong place. */
+			table?: {
+				role: "header" | "delimiter" | "row";
+				first_row: boolean;
+				last: boolean;
+			};
 		}[];
 		/** Buffer version these byte ranges were captured at. Pass back to
 		* coordinate-mapping APIs to repair stale offsets from this batch. */
 		epoch: number;
+		/** Whether any split shows this buffer in compose/preview mode, read from
+		* the live view states as this batch was built.
+		*
+		* Gate decoration work on this, not on
+		* `getBufferInfo(buffer_id).is_composing_in_any_split`. The editor marks
+		* these lines as seen the moment it sends the batch, so the batch is the
+		* only offer they get, while `getBufferInfo` reads a state snapshot
+		* refreshed on the editor thread's own schedule — early in a mode change
+		* it still reports the mode the buffer just left. Gating on the snapshot
+		* therefore drops the first decoration pass at random, leaving the
+		* document undecorated until an edit or a scroll produces another
+		* batch. */
+		is_composing_in_any_split: boolean;
 	};
 	// ── commands ─────────────────────────────────────────────────────────────
 	pre_command: {
