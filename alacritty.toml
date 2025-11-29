@@ -68,16 +68,12 @@ white   = "#CECDC3"
 
 [cursor]
 vi_mode_style = "Block"
-
-[cursor.style]
-shape = "Beam"
+style = {shape = "Beam", blinking = "Off"}
 
 [font]
 size = 12
-
-[font.normal]
-family = "Berkeley Mono"
-style = "Regular"
+normal = { family = "Berkeley Mono", style = "Regular" }
+offset = { x = 0, y = 5 }
 
 [terminal]
 shell = { program = "/opt/homebrew/bin/nu", args = ["--config", "~/.config.nu", "--env-config", "~/.env.nu"]}
