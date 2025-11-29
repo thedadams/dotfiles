@@ -5,7 +5,8 @@ layout {
     pane split_direction="vertical" {
         pane {
             name "k9s"
-            command "/opt/homebrew/bin/k9s"
+            command "/opt/homebrew/bin/nu"
+            args "--config" "/Users/thedadams/.config.nu" "--env-config" "/Users/thedadams/.env.nu" "-c" "k9s"
         }
         pane {
             name "port-forward"
