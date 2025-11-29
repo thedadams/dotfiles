@@ -28,6 +28,7 @@
     },
   },
   "edit_predictions": {
+    "allow_data_collection": "yes",
     "copilot": {
       "enable_next_edit_suggestions": true,
     },
@@ -161,7 +162,7 @@
       "effort": "high",
       "enable_thinking": true,
       "provider": "openai-subscribed",
-      "model": "gpt-5.5",
+      "model": "gpt-5.6-terra",
     },
     "use_modifier_to_send": false,
   },
@@ -274,6 +275,7 @@
     "use_system_clipboard": "never",
   },
   "project_panel": {
+    "sticky_scroll": false,
     "diagnostic_badges": true,
     "git_status_indicator": true,
     "dock": "left",
