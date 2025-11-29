@@ -110,3 +110,9 @@ export PATH="$HOME/.local/bin:$PATH"
 
 # Added by codebase-memory-mcp install
 export PATH="/Users/thedadams/.local/bin:$PATH"
+
+rex_bin="/Applications/Rex Beta.app/Contents/Helpers/Rex Server.rex/Contents/MacOS"
+
+if [[ -d "$rex_bin" ]]; then
+    export PATH="$rex_bin:$PATH"
+fi
