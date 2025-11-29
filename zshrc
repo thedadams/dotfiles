@@ -52,7 +52,7 @@ COMPLETION_WAITING_DOTS="true"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-EDITOR="nvim"
+EDITOR="hx"
 KUBE_EDITOR="$EDITOR"
 OTTO8_EDITOR="$EDITOR"
 GOPATH="$HOME/go"

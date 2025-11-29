@@ -1,0 +1,46 @@
+theme = "flexoki_dark"
+
+[editor]
+line-number = "absolute"
+mouse = true
+clipboard-provider = "pasteboard"
+cursorline = true
+scrolloff = 8
+bufferline = "multiple"
+color-modes = true
+true-color = true
+popup-border = "all"
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.indent-guides]
+render = true
+skip-levels = 1
+
+[editor.lsp]
+display-messages = true
+display-inlay-hints = true
+
+[editor.soft-wrap]
+enable = false
+
+[editor.statusline]
+left = ["mode", "spinner", "file-name", "file-modification-indicator", "read-only-indicator"]
+center = ["version-control"]
+right = ["diagnostics", "selections", "position", "position-percentage", "file-encoding", "file-line-ending", "file-type"]
+
+[editor.file-picker]
+hidden = false
+
+[keys.normal.space]
+w = ":write"
+q = ":quit"
+
+[keys.normal]
+C-h = "jump_view_left"
+C-j = "jump_view_down"
+C-k = "jump_view_up"
+C-l = "jump_view_right"
