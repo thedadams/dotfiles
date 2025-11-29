@@ -18,7 +18,7 @@ expanded_context_fg = "#6f7785"
 
 syntax_add_bg = "#2b3329"
 syntax_del_bg = "#3a272f"
-syntax_theme = "ember-one-syntax.tmTheme"
+syntax_theme = "ember-one-dark-syntax.tmTheme"
 
 file_added = "#a7c76f"
 file_modified = "#e7c664"
