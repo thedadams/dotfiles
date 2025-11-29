@@ -198,6 +198,22 @@
         },
       },
     },
+    "Ember One Dark": {
+      "syntax": {
+        "constant.comment.todo": {
+          "color": "#2E527Cff",
+        },
+        "string.comment.info": {
+          "color": "#465D33ff",
+        },
+        "keyword.comment.warn": {
+          "color": "#66552Dff",
+        },
+        "property.comment.error": {
+          "color": "#63303Aff",
+        },
+      },
+    },
     "Flexoki Dark": {
       "syntax": {
         "constant.comment.todo": {
