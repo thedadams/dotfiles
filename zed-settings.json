@@ -1,10 +1,4 @@
 {
-  "outline_panel": {
-    "dock": "left",
-  },
-  "collaboration_panel": {
-    "dock": "left",
-  },
   "semantic_tokens": "combined",
   "global_lsp_settings": {
     "semantic_token_rules": [
@@ -68,7 +62,11 @@
   "title_bar": {
     "show_branch_icon": true,
   },
-  "icon_theme": "Colored Zed Icons Theme Dark",
+  "icon_theme": {
+    "mode": "light",
+    "light": "Colored Zed Icons Theme Dark",
+    "dark": "Colored Zed Icons Theme Dark",
+  },
   "file_types": {
     "Dockerfile": ["Dockerfile*"],
     "Git Commit": ["**/*.jjdescription"],
@@ -92,6 +90,7 @@
       "local": {
         "name": "Local",
         "tools": {
+          "search_web": true,
           "fetch": true,
           "find_path": true,
           "grep": true,
@@ -100,7 +99,6 @@
           "read_file": true,
           "terminal": true,
           "thinking": true,
-          "web_search": true,
         },
         "enable_all_context_servers": false,
         "context_servers": {},
@@ -136,7 +134,11 @@
       "hard_tabs": true,
     },
   },
-  "theme": "Flexoki Dark",
+  "theme": {
+    "mode": "system",
+    "light": "Flexoki Light",
+    "dark": "Flexoki Dark",
+  },
   "theme_overrides": {
     "Ayu Dark": {
       "syntax": {
