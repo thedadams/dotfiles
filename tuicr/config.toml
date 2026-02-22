@@ -1,4 +1,4 @@
-theme = "ember-one-light"
+theme = "ember-one-dark"
 diff_view = "side-by-side"
 comment_types = [
   { id = "note", label = "question", definition = "ask for clarification", color = "yellow" },

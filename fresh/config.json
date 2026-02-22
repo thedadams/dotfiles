@@ -1,5 +1,5 @@
 {
-  "theme": "ember-one-light.json",
+  "theme": "ember-one-dark.json",
   "editor": {
       "tab_size": 4,
       "completion_popup_auto_show": true,
