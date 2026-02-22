@@ -1,0 +1,54 @@
+# Ember One Light for tuicr
+
+panel_bg = "#f7f5f0"
+bg_highlight = "#d7e2ef"
+
+fg_primary = "#2d333b"
+fg_secondary = "#595e66"
+fg_dim = "#6a716b"
+
+diff_add = "#527524"
+diff_add_bg = "#eaf1e4"
+diff_del = "#c43e55"
+diff_del_bg = "#f6e6e8"
+diff_context = "#2d333b"
+diff_hunk_header = "#286dae"
+expanded_context_fg = "#6a716b"
+
+syntax_add_bg = "#eaf1e4"
+syntax_del_bg = "#f6e6e8"
+syntax_theme = "ember-one-light-syntax.tmTheme"
+
+file_added = "#527524"
+file_modified = "#8a6d00"
+file_deleted = "#c43e55"
+file_renamed = "#7d4db3"
+
+reviewed = "#527524"
+pending = "#8a6d00"
+
+comment_note = "#286dae"
+comment_suggestion = "#0a756f"
+comment_issue = "#c43e55"
+comment_praise = "#47701e"
+
+border_focused = "#a9561f"
+border_unfocused = "#c8c2b7"
+
+status_bar_bg = "#f0eee8"
+cursor_color = "#a9561f"
+cursor_line_bg = "#e7e4dc"
+branch_name = "#7d4db3"
+help_indicator = "#6a716b"
+
+message_info_fg = "#f7f5f0"
+message_info_bg = "#286dae"
+message_warning_fg = "#f7f5f0"
+message_warning_bg = "#8a6d00"
+message_error_fg = "#f7f5f0"
+message_error_bg = "#c43e55"
+
+update_badge_fg = "#f7f5f0"
+update_badge_bg = "#a9561f"
+mode_fg = "#f7f5f0"
+mode_bg = "#a9561f"

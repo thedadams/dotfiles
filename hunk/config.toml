@@ -2,7 +2,7 @@ theme = "custom"
 
 [custom_theme]
 base = "ember"
-label = "Ember One"
+label = "Ember One Dark"
 
 background = "#20242C"
 panel = "#282E37"

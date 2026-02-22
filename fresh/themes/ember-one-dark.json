@@ -1,5 +1,5 @@
 {
-  "name": "ember-one",
+  "name": "ember-one-dark",
   "extends": "builtin://dark",
   "editor": {
     "bg": [32, 36, 44],

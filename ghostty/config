@@ -35,7 +35,7 @@ command = /opt/homebrew/bin/zellij
 keybind = shift+enter=text:\x1b\r
 
 font-family = Lilex
-theme = ember-one
+theme = ember-one-light
 
 unfocused-split-opacity = 0.4
 adjust-cell-height = 4
