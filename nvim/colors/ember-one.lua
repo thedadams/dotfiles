@@ -4,7 +4,6 @@
 -- Use with:  vim.cmd.colorscheme("ember-one")
 
 vim.o.termguicolors = true
-vim.o.background = "dark"
 
 vim.cmd("highlight clear")
 if vim.fn.exists("syntax_on") == 1 then
@@ -13,35 +12,107 @@ end
 
 vim.g.colors_name = "ember-one"
 
-local c = {
-  black = "#191D24",
-  bg = "#20242C",
-  bg2 = "#282E37",
-  ui = "#303743",
-  ui2 = "#37404D",
-  ui3 = "#3F4F66",
-  ui4 = "#434D5B",
+local palettes = {
+  dark = {
+    black = "#191D24",
+    bg = "#20242C",
+    bg2 = "#282E37",
+    ui = "#303743",
+    ui2 = "#37404D",
+    ui3 = "#3F4F66",
+    ui4 = "#434D5B",
 
-  tx3 = "#7F8998",
-  tx2 = "#AAB4C0",
-  tx = "#E1E6EC",
-  tx_strong = "#F5F7FA",
+    tx3 = "#7F8998",
+    tx2 = "#AAB4C0",
+    tx = "#E1E6EC",
+    tx_strong = "#F5F7FA",
 
-  hint = "#8792A0",
-  comment = "#788391",
-  comment_doc = "#9CA7B3",
+    hint = "#8792A0",
+    comment = "#788391",
+    comment_doc = "#9CA7B3",
 
-  red = "#EA5670",
-  orange = "#F58B45",
-  yellow = "#DDBB52",
-  green = "#99C45C",
-  cyan = "#36CDBB",
-  blue = "#5FAAF7",
-  purple = "#B96EF2",
-  magenta = "#E655A7",
+    red = "#EA5670",
+    orange = "#F58B45",
+    yellow = "#DDBB52",
+    green = "#99C45C",
+    cyan = "#36CDBB",
+    blue = "#5FAAF7",
+    purple = "#B96EF2",
+    magenta = "#E655A7",
 
-  none = "NONE",
+    diff_add_bg = "#2C3431",
+    diff_change_bg = "#333330",
+    diff_delete_bg = "#352933",
+    diff_text_bg = "#4B3931",
+    diagnostic_error_bg = "#302831",
+    diagnostic_warn_bg = "#2F302F",
+    diagnostic_info_bg = "#252F3C",
+    diagnostic_hint_bg = "#282D35",
+    diagnostic_ok_bg = "#293130",
+
+    term_black = "#20242C",
+    term_white = "#E1E6EC",
+    term_bright_black = "#56606E",
+    term_bright_red = "#F07186",
+    term_bright_green = "#B8DA74",
+    term_bright_yellow = "#EAC767",
+    term_bright_blue = "#82BEFA",
+    term_bright_magenta = "#CE8BFA",
+    term_bright_cyan = "#61DDCF",
+    term_bright_white = "#F5F7FA",
+  },
+  light = {
+    black = "#171B21",
+    bg = "#F7F5F0",
+    bg2 = "#F0EEE8",
+    ui = "#E7E4DC",
+    ui2 = "#DDD9CF",
+    ui3 = "#D7E2EF",
+    ui4 = "#C8C2B7",
+
+    tx3 = "#7A746B",
+    tx2 = "#595E66",
+    tx = "#2D333B",
+    tx_strong = "#171B21",
+
+    hint = "#6E746F",
+    comment = "#6A716B",
+    comment_doc = "#58635D",
+
+    red = "#C43E55",
+    orange = "#A9561F",
+    yellow = "#8A6D00",
+    green = "#527524",
+    cyan = "#0A756F",
+    blue = "#286DAE",
+    purple = "#7D4DB3",
+    magenta = "#A23D79",
+
+    diff_add_bg = "#EAF1E4",
+    diff_change_bg = "#F3EED9",
+    diff_delete_bg = "#F6E6E8",
+    diff_text_bg = "#EAD9C9",
+    diagnostic_error_bg = "#F6E6E8",
+    diagnostic_warn_bg = "#F3EED9",
+    diagnostic_info_bg = "#E5EDF6",
+    diagnostic_hint_bg = "#E8ECE7",
+    diagnostic_ok_bg = "#EAF1E4",
+
+    term_black = "#171B21",
+    term_white = "#A8A198",
+    term_bright_black = "#2D333B",
+    term_bright_red = "#B72F49",
+    term_bright_green = "#47701E",
+    term_bright_yellow = "#7C6200",
+    term_bright_blue = "#1F659F",
+    term_bright_magenta = "#7442A4",
+    term_bright_cyan = "#08716C",
+    term_bright_white = "#F7F5F0",
+  },
 }
+
+local c = palettes[vim.o.background] or palettes.dark
+c.none = "NONE"
 
 local function hl(group, spec)
   vim.api.nvim_set_hl(0, group, spec)
@@ -116,10 +187,10 @@ hl("WinBar", { fg = c.tx2, bg = c.bg })
 hl("WinBarNC", { fg = c.tx3, bg = c.bg })
 
 -- Diffs ----------------------------------------------------------------------
-hl("DiffAdd", { fg = c.green, bg = "#2C3431" })
-hl("DiffChange", { fg = c.yellow, bg = "#333330" })
-hl("DiffDelete", { fg = c.red, bg = "#352933" })
-hl("DiffText", { fg = c.orange, bg = "#4B3931", bold = true })
+hl("DiffAdd", { fg = c.green, bg = c.diff_add_bg })
+hl("DiffChange", { fg = c.yellow, bg = c.diff_change_bg })
+hl("DiffDelete", { fg = c.red, bg = c.diff_delete_bg })
+hl("DiffText", { fg = c.orange, bg = c.diff_text_bg, bold = true })
 
 -- Diagnostics ----------------------------------------------------------------
 hl("DiagnosticError", { fg = c.red })
@@ -128,11 +199,11 @@ hl("DiagnosticInfo", { fg = c.blue })
 hl("DiagnosticHint", { fg = c.hint })
 hl("DiagnosticOk", { fg = c.green })
 
-hl("DiagnosticVirtualTextError", { fg = c.red, bg = "#302831" })
-hl("DiagnosticVirtualTextWarn", { fg = c.yellow, bg = "#2F302F" })
-hl("DiagnosticVirtualTextInfo", { fg = c.blue, bg = "#252F3C" })
-hl("DiagnosticVirtualTextHint", { fg = c.hint, bg = "#282D35" })
-hl("DiagnosticVirtualTextOk", { fg = c.green, bg = "#293130" })
+hl("DiagnosticVirtualTextError", { fg = c.red, bg = c.diagnostic_error_bg })
+hl("DiagnosticVirtualTextWarn", { fg = c.yellow, bg = c.diagnostic_warn_bg })
+hl("DiagnosticVirtualTextInfo", { fg = c.blue, bg = c.diagnostic_info_bg })
+hl("DiagnosticVirtualTextHint", { fg = c.hint, bg = c.diagnostic_hint_bg })
+hl("DiagnosticVirtualTextOk", { fg = c.green, bg = c.diagnostic_ok_bg })
 
 hl("DiagnosticUnderlineError", { sp = c.red, undercurl = true })
 hl("DiagnosticUnderlineWarn", { sp = c.yellow, undercurl = true })
@@ -320,9 +391,9 @@ hl("GitSignsDelete", { fg = c.red, bg = c.bg })
 hl("GitSignsAddNr", { fg = c.green, bg = c.bg })
 hl("GitSignsChangeNr", { fg = c.yellow, bg = c.bg })
 hl("GitSignsDeleteNr", { fg = c.red, bg = c.bg })
-hl("GitSignsAddLn", { bg = "#293130" })
-hl("GitSignsChangeLn", { bg = "#2F302F" })
-hl("GitSignsDeleteLn", { bg = "#302831" })
+hl("GitSignsAddLn", { bg = c.diagnostic_ok_bg })
+hl("GitSignsChangeLn", { bg = c.diagnostic_warn_bg })
+hl("GitSignsDeleteLn", { bg = c.diagnostic_error_bg })
 
 -- Completion -----------------------------------------------------------------
 hl("CmpItemAbbr", { fg = c.tx })
@@ -476,20 +547,20 @@ hl("SnacksPickerMatch", { fg = c.blue, bold = true })
 hl("SnacksPickerCursorLine", { bg = c.ui3 })
 
 -- Terminal colors ------------------------------------------------------------
-vim.g.terminal_color_0 = c.bg
+vim.g.terminal_color_0 = c.term_black
 vim.g.terminal_color_1 = c.red
 vim.g.terminal_color_2 = c.green
 vim.g.terminal_color_3 = c.yellow
 vim.g.terminal_color_4 = c.blue
 vim.g.terminal_color_5 = c.purple
 vim.g.terminal_color_6 = c.cyan
-vim.g.terminal_color_7 = c.tx
+vim.g.terminal_color_7 = c.term_white
 
-vim.g.terminal_color_8 = "#56606E"
-vim.g.terminal_color_9 = "#F07186"
-vim.g.terminal_color_10 = "#B8DA74"
-vim.g.terminal_color_11 = "#EAC767"
-vim.g.terminal_color_12 = "#82BEFA"
-vim.g.terminal_color_13 = "#CE8BFA"
-vim.g.terminal_color_14 = "#61DDCF"
-vim.g.terminal_color_15 = c.tx_strong
+vim.g.terminal_color_8 = c.term_bright_black
+vim.g.terminal_color_9 = c.term_bright_red
+vim.g.terminal_color_10 = c.term_bright_green
+vim.g.terminal_color_11 = c.term_bright_yellow
+vim.g.terminal_color_12 = c.term_bright_blue
+vim.g.terminal_color_13 = c.term_bright_magenta
+vim.g.terminal_color_14 = c.term_bright_cyan
+vim.g.terminal_color_15 = c.term_bright_white

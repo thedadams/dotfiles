@@ -190,7 +190,7 @@
   },
   "theme": {
     "mode": "dark",
-    "light": "Flexoki Light",
+    "light": "Ember One Light",
     "dark": "Ember One Dark",
   },
   "theme_overrides": {
@@ -226,6 +226,26 @@
         },
         "property.comment.error": {
           "color": "#63303Aff",
+          "font_style": "italic",
+        },
+      },
+    },
+    "Ember One Light": {
+      "syntax": {
+        "constant.comment.todo": {
+          "color": "#286DAEff",
+          "font_style": "italic",
+        },
+        "string.comment.info": {
+          "color": "#527524ff",
+          "font_style": "italic",
+        },
+        "keyword.comment.warn": {
+          "color": "#8A6D00ff",
+          "font_style": "italic",
+        },
+        "property.comment.error": {
+          "color": "#C43E55ff",
           "font_style": "italic",
         },
       },

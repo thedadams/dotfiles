@@ -2,7 +2,7 @@
 // Personal color scheme by Donnie Adams
 
 themes {
-    ember-one {
+    ember-one-dark {
         text_unselected {
             base 225 230 236
             background 32 36 44
@@ -140,6 +140,147 @@ themes {
             player_8 234 86 112
             player_9 127 137 152
             player_10 245 247 250
+        }
+    }
+
+    ember-one-light {
+        text_unselected {
+            base 45 51 59
+            background 247 245 240
+            emphasis_0 169 86 31
+            emphasis_1 10 117 111
+            emphasis_2 82 117 36
+            emphasis_3 125 77 179
+        }
+
+        text_selected {
+            base 23 27 33
+            background 215 226 239
+            emphasis_0 169 86 31
+            emphasis_1 10 117 111
+            emphasis_2 82 117 36
+            emphasis_3 125 77 179
+        }
+
+        ribbon_unselected {
+            base 89 94 102
+            background 240 238 232
+            emphasis_0 196 62 85
+            emphasis_1 169 86 31
+            emphasis_2 40 109 174
+            emphasis_3 125 77 179
+        }
+
+        ribbon_selected {
+            base 247 245 240
+            background 40 109 174
+            emphasis_0 196 62 85
+            emphasis_1 169 86 31
+            emphasis_2 82 117 36
+            emphasis_3 162 61 121
+        }
+
+        table_title {
+            base 40 109 174
+            background 0
+            emphasis_0 169 86 31
+            emphasis_1 10 117 111
+            emphasis_2 82 117 36
+            emphasis_3 125 77 179
+        }
+
+        table_cell_unselected {
+            base 45 51 59
+            background 247 245 240
+            emphasis_0 169 86 31
+            emphasis_1 10 117 111
+            emphasis_2 82 117 36
+            emphasis_3 125 77 179
+        }
+
+        table_cell_selected {
+            base 23 27 33
+            background 231 228 220
+            emphasis_0 169 86 31
+            emphasis_1 10 117 111
+            emphasis_2 82 117 36
+            emphasis_3 125 77 179
+        }
+
+        list_unselected {
+            base 45 51 59
+            background 247 245 240
+            emphasis_0 169 86 31
+            emphasis_1 10 117 111
+            emphasis_2 82 117 36
+            emphasis_3 125 77 179
+        }
+
+        list_selected {
+            base 23 27 33
+            background 231 228 220
+            emphasis_0 169 86 31
+            emphasis_1 10 117 111
+            emphasis_2 82 117 36
+            emphasis_3 125 77 179
+        }
+
+        frame_unselected {
+            base 200 194 183
+            background 0
+            emphasis_0 169 86 31
+            emphasis_1 10 117 111
+            emphasis_2 125 77 179
+            emphasis_3 0
+        }
+
+        frame_selected {
+            base 40 109 174
+            background 0
+            emphasis_0 169 86 31
+            emphasis_1 10 117 111
+            emphasis_2 125 77 179
+            emphasis_3 0
+        }
+
+        frame_highlight {
+            base 169 86 31
+            background 0
+            emphasis_0 125 77 179
+            emphasis_1 169 86 31
+            emphasis_2 138 109 0
+            emphasis_3 162 61 121
+        }
+
+        exit_code_success {
+            base 82 117 36
+            background 0
+            emphasis_0 10 117 111
+            emphasis_1 247 245 240
+            emphasis_2 125 77 179
+            emphasis_3 40 109 174
+        }
+
+        exit_code_error {
+            base 196 62 85
+            background 0
+            emphasis_0 138 109 0
+            emphasis_1 0
+            emphasis_2 0
+            emphasis_3 0
+        }
+
+        multiplayer_user_colors {
+            player_1 40 109 174
+            player_2 125 77 179
+            player_3 169 86 31
+            player_4 10 117 111
+            player_5 162 61 121
+            player_6 138 109 0
+            player_7 82 117 36
+            player_8 196 62 85
+            player_9 122 116 107
+            player_10 23 27 33
         }
     }
 }
