@@ -36,6 +36,7 @@ path add "/usr/bin:/bin"
 path add "/usr/sbin"
 path add "/sbin"
 path add "~/.rd/bin"
+path add "~/.local/bin"
 path add ($env.GOPATH | path join "bin")
 
 $env.config.edit_mode = 'vi'
