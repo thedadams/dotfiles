@@ -24,6 +24,7 @@ $env.config.buffer_editor = ["nvim"]
 
 $env.GOPATH = ($env.HOME | path join "go")
 
+path add ($env.HOME | path join "Executables")
 path add "/opt/homebrew/bin"
 path add "~/bin"
 path add "~/.cargo/bin"
