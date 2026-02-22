@@ -19,12 +19,16 @@ elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
 fi
 
 # pyenv config
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init --path)"
-eval "$(pyenv virtualenv-init -)"
+if type pyenv &>/dev/null; then
+  export PYENV_ROOT="$HOME/.pyenv"
+  export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init --path)"
+  eval "$(pyenv virtualenv-init -)"
+fi
 
-eval "$(direnv hook zsh)"
+if type direnv &>/dev/null; then
+  eval "$(direnv hook zsh)"
+fi
 
 # Setup homebrew autocomplete
 if type brew &>/dev/null; then
@@ -91,41 +95,7 @@ bindkey -s "^[Oo" "/"
 # vi mode
 set -o vi
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-function set_win_title() {
-    local cmd=" ($@)"
-    if [[ "$cmd" == " (starship_precmd)" || "$cmd" == " ()" ]]
-    then
-        cmd=""
-    fi
-    if [[ $PWD == $HOME ]]
-    then
-        if [[ $SSH_TTY ]]
-        then
-            echo -ne "\033]0; 🏛️ @ $HOSTNAME ~$cmd\a" </dev/null
-        else
-            echo -ne "\033]0; 🏠 ~$cmd\a" </dev/null
-        fi
-    else
-        BASEPWD=$(basename "$PWD")
-        if [[ $SSH_TTY ]]
-        then
-            echo -ne "\033]0; 🌩️ $BASEPWD @ $HOSTNAME $cmd\a" </dev/null
-        else
-            echo -ne "\033]0; 📁 $BASEPWD $cmd\a" </dev/null
-        fi
-    fi
-
-}
 precmd_functions+=(set_win_title)
-export STARSHIP_CONFIG=$HOME/.starship.toml
-eval "$(starship init zsh)"
-
-### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
-export PATH="/Users/thedadams/.rd/bin:$PATH"
-### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
 
 ssh-add --apple-use-keychain $HOME/.ssh/id_rsa
 
