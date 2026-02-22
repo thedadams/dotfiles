@@ -6,6 +6,13 @@
     "dock": "left",
   },
   "semantic_tokens": "combined",
+  "global_lsp_settings": {
+    "semantic_token_rules": [
+      {
+        "token_type": "comment",
+      },
+    ],
+  },
   "agent_servers": {
     "github-copilot-cli": {
       "type": "registry",
