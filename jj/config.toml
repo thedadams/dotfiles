@@ -2,7 +2,7 @@
 
 [user]
 name = "Donnie Adams"
-email = "donnie@obot.ai"
+email = "donnie@thedadams.com"
 
 [signing]
 backend = "ssh"
