@@ -110,7 +110,7 @@
       "hard_tabs": true,
     },
   },
-  "theme": "Ayu Dark",
+  "theme": "Flexoki Dark",
   "theme_overrides": {
     "Ayu Dark": {
       "syntax": {
@@ -125,6 +125,22 @@
         },
         "property.comment.error": {
           "color": "#83353bff",
+        },
+      },
+    },
+    "Flexoki Dark": {
+      "syntax": {
+        "constant.comment.todo": {
+          "color": "#163b66ff",
+        },
+        "string.comment.info": {
+          "color": "#3d4c07ff",
+        },
+        "keyword.comment.warn": {
+          "color": "#71320dff",
+        },
+        "property.comment.error": {
+          "color": "#6c201cff",
         },
       },
     },

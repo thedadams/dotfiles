@@ -33,7 +33,7 @@ command = /opt/homebrew/bin/nu --config ~/.config.nu --env-config ~/.env.nu
 keybind = shift+enter=text:\x1b\r
 
 font-family = Berkeley Mono
-theme = Ayu
+theme = Flexoki Dark
 
 unfocused-split-opacity = 0.4
 adjust-cell-height = 4
