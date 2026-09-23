@@ -49,7 +49,7 @@ fi
 # export ARCHFLAGS="-arch x86_64"
 
 # ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
+export SSH_KEY_PATH="~/.ssh/id_ed25519"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -96,12 +96,6 @@ bindkey -s "^[Oo" "/"
 set -o vi
 
 precmd_functions+=(set_win_title)
-
-ssh-add -l >/dev/null 2>&1
-if [[ $? -eq 2 ]]; then
-    eval "$(ssh-agent -s)" >/dev/null
-fi
-ssh-add --apple-use-keychain "$HOME/.ssh/id_rsa"
 
 fpath=($HOME/.nix-profile/share/zsh/site-functions $fpath)
 
