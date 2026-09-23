@@ -306,7 +306,6 @@ tab_width 4
 # menu_style "compact"
 # value type: one of "bars_top_bottom", "bars_left_right", "bar_left", "bar_right", "thick_boxed", "extra_thick_boxed", "dotted_boxed", "rounded_boxed", "double_boxed", "single_double_top_bottom_boxed", "single_double_left_right_boxed", "boxed", "bar_left_spacious", "bar_right_spacious", "spacious", "compact"
 
-# dialog_style "thick_boxed"
 # value type: one of "bars_top_bottom", "bars_left_right", "bar_left", "bar_right", "thick_boxed", "extra_thick_boxed", "dotted_boxed", "rounded_boxed", "double_boxed", "single_double_top_bottom_boxed", "single_double_left_right_boxed", "boxed", "bar_left_spacious", "bar_right_spacious", "spacious", "compact"
 
 # panel_style "compact"
