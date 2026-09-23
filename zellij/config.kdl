@@ -307,6 +307,10 @@ web_client {
 // Default: default
 //
 theme "ember-one-dark"
+theme_dark "ember-one-dark"
+theme_light "ember-one-light"
+
+explicit_theme_hue "dark"
 
 // Choose the base input mode of zellij.
 // Default: normal
